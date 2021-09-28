@@ -13,7 +13,7 @@ namespace MH.Database.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "202109271507230_Initialize"; }
+            get { return "202109280808165_Initialize"; }
         }
         
         string IMigrationMetadata.Source
