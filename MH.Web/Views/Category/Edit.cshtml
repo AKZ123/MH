@@ -1,0 +1,19 @@
+﻿@model MH.Entities.Category
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+<form method="post">
+    <input type="hidden" name="CID" value="@Model.CID" />
+    <label>Name </label>
+    <input class="form-control" name="Name" value="@Model.Name" />
+
+    <br />
+
+    <label>Description</label>
+    <input class="form-control" name="Description" value="@Model.Description" />
+    <br />
+    <button type="submit">Sabe</button>
+</form>

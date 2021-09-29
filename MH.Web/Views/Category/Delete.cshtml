@@ -1,0 +1,14 @@
+﻿@model MH.Entities.Category
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<form method="post">
+    <input type="hidden" name="CID" value="@Model.CID" />
+
+    <button type="submit">Sabe</button>
+</form>
+<a href="/Index">Cancel</a>

@@ -13,7 +13,8 @@ namespace MH.Web.Controllers
         // GET: Category
         public ActionResult Index()
         {
-            return View();
+            var category = CategoriesService.Instance.GetAllCategories();
+            return View(category);
         }
 
         // GET: Category/Details/5
@@ -37,8 +38,8 @@ namespace MH.Web.Controllers
                 CategoriesService.Instance.SaveCategory(collection);
 
                 // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
+                return View();
+               // return RedirectToAction("Index");
             }
             catch
             {
@@ -49,15 +50,17 @@ namespace MH.Web.Controllers
         // GET: Category/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var category = CategoriesService.Instance.GetCategory(id);
+            return View(category);
         }
 
         // POST: Category/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(Category category)
         {
             try
             {
+                CategoriesService.Instance.UpdateCategory(category);
                 // TODO: Add update logic here
 
                 return RedirectToAction("Index");
@@ -71,23 +74,34 @@ namespace MH.Web.Controllers
         // GET: Category/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var category = CategoriesService.Instance.GetCategory(id);
+            return View(category);
+        }
+
+
+        [HttpPost]
+        public ActionResult Delete(Category category)
+        {
+            CategoriesService.Instance.DeleteCategory(category.CID);
+
+            return RedirectToAction("Index");
         }
 
         // POST: Category/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
+        //[HttpPost]
+        //public ActionResult Delete(int id, FormCollection collection)
+        //{
+        //    try
+        //    {
+        //        // TODO: Add delete logic here
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        //        return RedirectToAction("Index");
+        //    }
+        //    catch
+        //    {
+        //        return View();
+        //    }
+        //}
+
     }
 }
