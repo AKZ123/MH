@@ -54,7 +54,6 @@ namespace MH.Web.Controllers
         {
             try
             {
-                // TODO: Add insert logic here
                 ProductsService.Instance.SaveProduct(product);
                 return RedirectToAction("ProductTable");
             }
@@ -65,47 +64,40 @@ namespace MH.Web.Controllers
         }
 
         // GET: Product/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int ID)
         {
-            return View();
+            var product = ProductsService.Instance.GetProduct(ID); 
+            return PartialView(product);
         }
 
         // POST: Product/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(Product product)
         {
             try
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+                ProductsService.Instance.UpdateProduct(product);
+                return RedirectToAction("ProductTable");
             }
             catch
             {
                 return View();
             }
         }
-
-        // GET: Product/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
+      
         // POST: Product/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int ID)
         {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+           // try
+            //{
+                ProductsService.Instance.DeleteProduct(ID);
+                return RedirectToAction("ProductTable");
+            //}
+           // catch
+           // {
+               // return View();
+            //}
         }
     }
 }

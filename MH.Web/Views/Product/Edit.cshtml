@@ -1,0 +1,59 @@
+﻿@model MH.Entities.Product
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit Product</h2>
+
+<form id="editProduct">
+    <input class="form-control" name="PID" value="@Model.PID" type="hidden"/>
+
+    <label>Name </label>
+    <input class="form-control" name="Name" value="@Model.Name" />
+
+    <br />
+    <label>MrpPrice </label>
+    <input class="form-control" name="MrpPrice" value="@Model.MrpPrice" />
+
+    <br /><label>PackSize </label>
+    <input class="form-control" name="PackSize" value="@Model.PackSize" />
+
+    <br />
+    <label>Description</label>
+    <input class="form-control" name="Description" value="@Model.Description" />
+    <br />
+    <button id="updateBtn" type="button">Update</button>
+</form>
+
+<script>
+
+    $("#updateBtn").click(function () {
+		/*if ($("#editProduct").valid()) {*/
+			$.ajax({
+				type: 'POST',
+				url: '@Url.Action("Edit", "Product")',
+				data: $("#editProduct").serialize()
+			})
+			.done(function (response) {
+				$("#tableContiner").html(response);
+				$("#actionContainer").html("");
+				focusAction("tableContiner");
+			})
+			.fail(function (XMLHttpRequest, textStatus, errorThrown) {
+				alert("FAIL");
+			});
+		//}
+		//else {
+		//	swal({
+		//		title: "Warning",
+		//		text: "Please enter all valid data in fields.",
+		//		icon: "warning",
+		//		buttons: true,
+		//		dangerMode: true,
+		//	});
+		//}
+	});
+   
+</script>
+
