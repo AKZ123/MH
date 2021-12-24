@@ -38,8 +38,8 @@ namespace MH.Web.Controllers
                 CategoriesService.Instance.SaveCategory(collection);
 
                 // TODO: Add insert logic here
-                return View();
-               // return RedirectToAction("Index");
+                //return View();
+                return RedirectToAction("Index");
             }
             catch
             {

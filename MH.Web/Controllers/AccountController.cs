@@ -52,6 +52,17 @@ namespace MH.Web.Controllers
             }
         }
 
+
+
+        //
+        // GET: /Account/Profile
+        [AllowAnonymous]
+        [HttpGet]
+        public ActionResult Profiles()
+        {
+            return View();
+        }
+
         //
         // GET: /Account/Login
         [AllowAnonymous]

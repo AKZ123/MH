@@ -1,35 +1,121 @@
-﻿@model MH.Entities.Product
-
+﻿@model MH.Web.ViewModels.EditProductViewModel
 @{
     ViewBag.Title = "Edit";
+
+    var imageURL = !string.IsNullOrEmpty(Model.ImageURL) ? Model.ImageURL : "/Content/image/system/NoImag.PNG";
 }
-
 <h2>Edit Product</h2>
-
 <form id="editProduct">
-    <input class="form-control" name="PID" value="@Model.PID" type="hidden"/>
-
-    <label>Name </label>
-    <input class="form-control" name="Name" value="@Model.Name" />
-
-    <br />
-    <label>MrpPrice </label>
-    <input class="form-control" name="MrpPrice" value="@Model.MrpPrice" />
-
-    <br /><label>PackSize </label>
-    <input class="form-control" name="PackSize" value="@Model.PackSize" />
-
-    <br />
-    <label>Description</label>
-    <input class="form-control" name="Description" value="@Model.Description" />
-    <br />
-    <button id="updateBtn" type="button">Update</button>
+    <input type="hidden" name="ID" value="@Model.PID" />
+    <div class="row">
+        <div class="col-md-8">
+            <div class="form-group">
+                <label>Category</label>
+                <select class="form-control" name="CategoryID">
+                    @foreach (var category in Model.AvailableCategories)
+                    {
+                        var selected = category.CID == Model.CategoryID ? "selected" : string.Empty;
+                        <option value="@category.CID" @selected>@category.Name</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Name</label>
+                <input class="form-control" name="Name" value="@Model.BrandName" />
+            </div>
+            <div class="form-group">
+                <label>Strength</label>
+                <input class="form-control" name="Description" value="@Model.Strength" />
+            </div>
+            <div class="form-group">
+                <label>Generic Name</label>
+                <input class="form-control" name="Description" value="@Model.GenericName" />
+            </div>
+            <div class="form-group">
+                <label>MfgLicNo</label>
+                <input class="form-control" name="Description" value="@Model.MfgLicNo" />
+            </div>
+            <div class="form-group">
+                <label>DAR | MA  No </label>
+                <input class="form-control" name="Description" value="@Model.DARNo" />
+            </div>
+            <div class="form-group">
+                <label>Pack Size</label>
+                <input class="form-control" name="Description" value="@Model.PackSize" />
+            </div>
+            <div class="form-group">
+                <label>Image</label>
+                <input type="hidden" id="ImageURL" name="ImageURL" />
+                <input class="form-control" id="imageUpload" name="Image" type="file" accept=".png, .jpg" />
+            </div>
+            <button id="updateBtn" type="button" class="btn btn-primary">Update</button>
+            <button id="cancelBtn" type="button" class="btn btn-primary">Cancel</button>
+        </div>
+        <div class="col-md-4">
+            <div class="thumb">
+                <img class="img-thumbnail img-fluid" id="productImage" src="@imageURL" />
+            </div>
+        </div>
+    </div>
 </form>
-
 <script>
-
-    $("#updateBtn").click(function () {
-		/*if ($("#editProduct").valid()) {*/
+	$('#editProduct').validate({
+		rules: {
+			Name: {
+				required: true,
+				minlength: 5,
+				maxlength: 50,
+			},
+			Description: {
+				maxlength: 500
+			},
+			Price: {
+				range: [1, 100000]
+			}
+		},
+		messages: {
+			Name: {
+				required: 'Name is required',
+				minlength: 'Minimum Length is 5',
+				maxlength: 'Maximum Length is 50'
+			},
+			Description: {
+				maxlength: 'Maximum Length is 500'
+			},
+			Price: {
+				range: 'Price must be within range of 1 - 100000.'
+			}
+		}
+	});
+	$("#imageUpload").change(function () {
+		var element = this;
+		var formData = new FormData();
+		var totalFiles = element.files.length;
+		for (var i = 0; i < totalFiles; i++) {
+			var file = element.files[i];
+			formData.append("Photo", file);
+		}
+		$.ajax({
+			type: 'POST',
+			url: '@Url.Action("UploadImage", "Shared")',
+			dataType: 'json',
+			data: formData,
+			contentType: false,
+			processData: false
+		})
+        .done(function (response) {
+        	console.log(response);
+        	if (response.Success) {
+        		$("#ImageURL").val(response.ImageURL);
+        		$("#productImage").attr("src", response.ImageURL);
+        	}
+        })
+        .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+        	alert("FAIL");
+        });
+	});
+	$("#updateBtn").click(function () {
+		if ($("#editProduct").valid()) {
 			$.ajax({
 				type: 'POST',
 				url: '@Url.Action("Edit", "Product")',
@@ -43,17 +129,20 @@
 			.fail(function (XMLHttpRequest, textStatus, errorThrown) {
 				alert("FAIL");
 			});
-		//}
-		//else {
-		//	swal({
-		//		title: "Warning",
-		//		text: "Please enter all valid data in fields.",
-		//		icon: "warning",
-		//		buttons: true,
-		//		dangerMode: true,
-		//	});
-		//}
+		}
+		else {
+			swal({
+				title: "Warning",
+				text: "Please enter all valid data in fields.",
+				icon: "warning",
+				buttons: true,
+				dangerMode: true,
+			});
+		}
 	});
-   
+	$("#cancelBtn").click(function () {
+		$("#actionContainer").html("");
+		focusAction("tableContiner");
+	});
 </script>
 

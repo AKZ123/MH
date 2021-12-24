@@ -2,6 +2,7 @@
 using MH.Entities;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,11 +25,29 @@ namespace MH.Services
         {
 
         }
-        #endregion
-        public void SaveProduct(Product product)
+
+        public int GetProductsCount(string search)
         {
             using (var context = new MHDbContext())
             {
+                if (!string.IsNullOrEmpty(search))
+                {
+                    return context.Products.Where(product => product.BrandName != null &&
+                         product.BrandName.ToLower().Contains(search.ToLower())).Count();
+                }
+                else
+                {
+                    return context.Products.Count();
+                }
+            }
+        }
+        #endregion
+        public void SaveProduct(Product product)
+        {
+            //  use   ( Reposetory)
+            using (var context = new MHDbContext())
+            {
+                context.Entry(product.Category).State = System.Data.Entity.EntityState.Unchanged;
                 context.Products.Add(product);
                 context.SaveChanges();
             }
@@ -41,15 +60,40 @@ namespace MH.Services
                 return context.Products.ToList();
             }
         }
-
         public Product GetProduct(int ID)
         {
             using (var context = new MHDbContext())
             {
-                return context.Products.Find(ID);
+                return context.Products.Where(x => x.PID == ID).Include(x => x.Category).FirstOrDefault();
+                //return context.Products.Find(ID);
             }
         }
-
+       
+        public List<Product> GetProducts(string search, int pageNo, int pageSize)
+        {
+            //int pageSize = 5;
+            using (var context = new MHDbContext())
+            {
+                if (!string.IsNullOrEmpty(search))
+                {
+                    return context.Products.Where(product => product.BrandName != null &&
+                         product.BrandName.ToLower().Contains(search.ToLower()))
+                         .OrderBy(x => x.PID)
+                         .Skip((pageNo - 1) * pageSize).Take(pageSize)
+                         .Include(x => x.Category)
+                         .ToList();
+                }
+                else
+                {
+                    return context.Products
+                        .OrderBy(X => X.PID)
+                        .Skip((pageNo - 1) * pageSize)
+                        .Take(pageSize)
+                        .Include(x => x.Category)
+                        .ToList();
+                }
+            }
+        }
         public void UpdateProduct(Product product)
         {
             using (var context = new MHDbContext())

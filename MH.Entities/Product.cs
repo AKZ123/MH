@@ -11,11 +11,15 @@ namespace MH.Entities
     {
         [Key]
         public int PID { get; set; }
-        public string Name { get; set; }
-        public decimal MrpPrice { get; set; }
+        public string BrandName { get; set; }
+        public string Strength { get; set; }
+        public string GenericName { get; set; }
+        public string MfgLicNo { get; set; }
+        //Drag Administration Registration Number
+        public string DARNo { get; set; }
+        public string ImageURL { get; set; }
+        //public decimal MrpPrice { get; set; }
         public int PackSize { get; set; }
-        public string Description { get; set; }
-
 
         public Category Category { get; set; }
     }

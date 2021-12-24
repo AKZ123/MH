@@ -56,6 +56,14 @@
     <Compile Include="Migrations\202109280808165_Initialize.designer.cs">
       <DependentUpon>202109280808165_Initialize.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202112201806104_ImageUrlonCategory.cs" />
+    <Compile Include="Migrations\202112201806104_ImageUrlonCategory.designer.cs">
+      <DependentUpon>202112201806104_ImageUrlonCategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202112241411318_ProductE.cs" />
+    <Compile Include="Migrations\202112241411318_ProductE.designer.cs">
+      <DependentUpon>202112241411318_ProductE.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -72,6 +80,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202109280808165_Initialize.resx">
       <DependentUpon>202109280808165_Initialize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202112201806104_ImageUrlonCategory.resx">
+      <DependentUpon>202112201806104_ImageUrlonCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202112241411318_ProductE.resx">
+      <DependentUpon>202112241411318_ProductE.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,62 +1,119 @@
-﻿@model MH.Entities.Product
+﻿@model MH.Web.ViewModels.NewProductViewModel
 @{
     ViewBag.Title = "Create";
+
+    var imageURL = "/Content/image/system/NoImag.PNG";
 }
-
-
 <h2>Create Product</h2>
-
-<form  id="createProduct">
-    <label>Name </label>
-    <input class="form-control" name="Name" />
-
-    <br />
-    <label>MrpPrice </label>
-    <input class="form-control" name="MrpPrice" />
-
-    <br /><label>PackSize </label>
-    <input class="form-control" name="PackSize" />
-
-    <br />
-    <label>Description</label>
-    <input class="form-control" name="Description" />
-    <br />
-    <button id="saveBtn" type="button">Sabe</button>
+<form id="createProduct">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="form-group">
+                <label>Category</label>
+                <select class="form-control" name="CategoryID">
+                    @foreach (var category in Model.AvailableCategories)
+                    {
+                        <option value="@category.CID">@category.Name</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Brand Name</label>
+                <input class="form-control" name="BrandName" />
+            </div>
+            <div class="form-group">
+                <label>Strength</label>
+                <input class="form-control" name="Strength" />
+            </div>
+            <div class="form-group">
+                <label>Generic Name</label>
+                <input class="form-control" name="GenericName" />
+            </div>
+            <div class="form-group">
+                <label>Mfg Lic No </label>
+                <input class="form-control" name="MfgLicNo" />
+            </div>
+            <div class="form-group">
+                <label>DAR | MA  No </label>
+                <input class="form-control" name="DARNo" />
+            </div>
+            <div class="form-group">
+                <label>Pack Size</label>
+                <input class="form-control" name="PackSize" />
+            </div>
+            <div class="form-group">
+                <label>Image</label>
+                <input type="hidden" id="ImageURL" name="ImageURL" />
+                <input class="form-control" id="imageUpload" name="Image" type="file" accept=".png, .jpg" />
+            </div>
+            <button id="saveBtn" type="button" class="btn btn-primary">Save</button>
+            <button id="cancelBtn" type="button" class="btn btn-primary">Cancel</button>
+        </div>
+        <div class="col-md-4">
+            <div class="thumb">
+                <img class="img-thumbnail img-fluid" id="productImage" src="@imageURL" />
+            </div>
+        </div>
+    </div>
 </form>
-
 <script>
-    //$('#createProduct').validate({
-    //    rules: {
-    //        Name: {
-    //            required: true,
-    //            minlength: 5,
-    //            maxlength: 50,
-    //        },
-    //        Description: {
-    //            maxlength: 500
-    //        },
-    //        Price: {
-    //            range: [1, 100000]
-    //        }
-    //    },
-    //    messages: {
-    //        Name: {
-    //            required: 'Name is required',
-    //            minlength: 'Minimum Length is 5',
-    //            maxlength: 'Maximum Length is 50'
-    //        },
-    //        Description: {
-    //            maxlength: 'Maximum Length is 500'
-    //        },
-    //        Price: {
-    //            range: 'Price must be within range of 1 - 100000.'
-    //        }
-    //    }
-    //});
-
-
-    $("#saveBtn").click(function () {
-		/*if ($("#createProduct").valid()) {*/
+	//$('#createProduct').validate({
+	//	rules: {
+	//		Name: {
+	//			required: true,
+	//			minlength: 5,
+	//			maxlength: 50,
+	//		},
+	//		Description: {
+	//			maxlength: 500
+	//		},
+	//		Price: {
+	//			range: [1, 100000]
+	//		}
+	//	},
+	//	messages: {
+	//		Name: {
+	//			required: 'Name is required',
+	//			minlength: 'Minimum Length is 5',
+	//			maxlength: 'Maximum Length is 50'
+	//		},
+	//		Description: {
+	//			maxlength: 'Maximum Length is 500'
+	//		},
+	//		Price: {
+	//			range: 'Price must be within range of 1 - 100000.'
+	//		}
+	//	}
+	//});
+	$("#imageUpload").change(function () {
+		var element = this;
+		var formData = new FormData();
+		var totalFiles = element.files.length;
+		for (var i = 0; i < totalFiles; i++) {
+			var file = element.files[i];
+			formData.append("Photo", file);
+		}
+		$.ajax({
+			type: 'POST',
+			url: '@Url.Action("UploadImage", "Shared")',
+			dataType: 'json',
+			data: formData,
+			contentType: false,
+			processData: false
+		})
+        .done(function (response) {
+        	//console.log(response);
+        	if (response.Success) {
+        		$("#ImageURL").val(response.ImageURL);
+                $("#productImage").attr("src", response.ImageURL);
+        	}
+        })
+        .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+        	alert("FAIL");
+        });
+	});
+	$("#saveBtn").click(function () {
+		//if ($("#createProduct").valid()) {
 			$.ajax({
 				type: 'POST',
 				url: '@Url.Action("Create", "Product")',
@@ -80,5 +137,9 @@
 		//		dangerMode: true,
 		//	});
 		//}
+	});
+	$("#cancelBtn").click(function () {
+        $("#actionContainer").html("");
+        focusAction("tableContiner");
 	});
 </script>
