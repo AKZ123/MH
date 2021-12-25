@@ -32,12 +32,6 @@ namespace MH.Web.Controllers
             return PartialView(model);
         }
 
-        // GET: Product/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
         // GET: Product/Create
         public ActionResult Create()
         {
@@ -144,5 +138,19 @@ namespace MH.Web.Controllers
                // return View();
             //}
         }
+
+        // GET: Product/Details/5
+        [HttpGet]
+        public ActionResult Details(int ID)
+        {
+            ProductViewModel model = new ProductViewModel();
+
+            model.Product = ProductsService.Instance.GetProduct(ID);
+
+            if (model.Product == null) return HttpNotFound();
+
+            return View(model);
+        }
+
     }
 }

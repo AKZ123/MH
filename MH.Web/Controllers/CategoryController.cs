@@ -1,5 +1,6 @@
 ﻿using MH.Entities;
 using MH.Services;
+using MH.Web.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,8 +14,30 @@ namespace MH.Web.Controllers
         // GET: Category
         public ActionResult Index()
         {
-            var category = CategoriesService.Instance.GetAllCategories();
-            return View(category);
+            return View();
+        }
+        public ActionResult CategoryTable(string search, int? pageNo)
+        {
+            CategorySearchViewModel model = new CategorySearchViewModel();
+            model.SearchTerm = search;
+
+            pageNo = pageNo.HasValue ? pageNo.Value > 0 ? pageNo.Value : 1 : 1;
+
+            var totalRecords = CategoriesService.Instance.GetCategoriesCount(search);
+            model.Categories = CategoriesService.Instance.GetCategories(search, pageNo.Value);
+
+            if (model.Categories != null)
+            {
+                model.Pager = new Pager(totalRecords, pageNo, 3);
+
+                //return PartialView("_CategoryTable", model);
+                return PartialView(model);
+
+            }
+            else
+            {
+                return HttpNotFound();
+            }
         }
 
         // GET: Category/Details/5
@@ -26,24 +49,33 @@ namespace MH.Web.Controllers
         // GET: Category/Create
         public ActionResult Create()
         {
-            return View();
+            return PartialView();
         }
 
         // POST: Category/Create
         [HttpPost]
-        public ActionResult Create(Category collection)
+        public ActionResult Create(NewCategoryViewModel model)
         {
-            try
+            if (ModelState.IsValid)
             {
-                CategoriesService.Instance.SaveCategory(collection);
-
-                // TODO: Add insert logic here
-                //return View();
-                return RedirectToAction("Index");
+                var newCategory = new Category();
+                newCategory.Name = model.Name;
+                newCategory.Description = model.Description;
+                newCategory.ImageURL = model.ImageURL; 
+                try
+                {
+                    CategoriesService.Instance.SaveCategory(newCategory);
+                }
+                catch
+                {
+                    return new HttpStatusCodeResult(500);
+                }
+                
+                return RedirectToAction("CategoryTable");
             }
-            catch
+            else
             {
-                return View();
+                return new HttpStatusCodeResult(401);
             }
         }
 

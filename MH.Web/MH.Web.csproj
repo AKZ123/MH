@@ -182,6 +182,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\CategoryViewModels.cs" />
     <Compile Include="ViewModels\ProductViewModel.cs" />
     <Compile Include="ViewModels\SharedViewModels.cs" />
   </ItemGroup>
@@ -255,6 +256,8 @@
     <Content Include="Views\Product\Create.cshtml" />
     <Content Include="Views\Product\Edit.cshtml" />
     <Content Include="Views\Account\Profiles.cshtml" />
+    <Content Include="Views\Product\Details.cshtml" />
+    <Content Include="Views\Category\CategoryTable.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

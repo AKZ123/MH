@@ -1,39 +1,36 @@
-﻿@model IEnumerable<MH.Entities.Category>
-
+﻿
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Categories";
 }
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
+<section class="flat-row flat-iconbox">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="title-section">
+                    <h2 class="title">
+                        Categories
+                    </h2>
+                </div>
+            </div>
+        </div>
+        <div id="tableContainer">
+            @{
+                Html.RenderAction("CategoryTable");
+            }
+        </div>
+        <hr />
+        <div id="actionContainer">
+        </div>
+    </div>
+</section>
 
-<h2>Index</h2>
+<script>
+	function focusAction(controlToFocus) {
+		$('html, body').animate({
+			scrollTop: $("#" + controlToFocus).offset().top - 100
+		}, 1000);
+	}
+</script>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.CID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.CID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.CID })
-        </td>
-    </tr>
-}
-
-</table>

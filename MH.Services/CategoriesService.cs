@@ -2,6 +2,7 @@
 using MH.Entities;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,7 +34,29 @@ namespace MH.Services
                 context.SaveChanges();
             }
         }
-
+        public Category GetCategory(int ID)
+        {
+            using (var context = new MHDbContext())
+            {
+                return context.Categories.Find(ID);
+            }
+        }
+  
+        public int GetCategoriesCount(string search)
+        {
+            using (var context = new MHDbContext())
+            {
+                if (!string.IsNullOrEmpty(search))
+                {
+                    return context.Categories.Where(category => category.Name != null &&
+                         category.Name.ToLower().Contains(search.ToLower())).Count();
+                }
+                else
+                {
+                    return context.Categories.Count();
+                }
+            }
+        }
         public List<Category> GetAllCategories()
         {
             using (var context = new MHDbContext())
@@ -41,12 +64,31 @@ namespace MH.Services
                 return context.Categories.ToList();
             }
         }
-
-        public Category GetCategory(int ID)
+        public List<Category> GetCategories(string search, int pageNo)
         {
+            int pageSize = 10;
+
             using (var context = new MHDbContext())
             {
-                return context.Categories.Find(ID);
+                if (!string.IsNullOrEmpty(search))
+                {
+                    return context.Categories.Where(category => category.Name != null &&
+                         category.Name.ToLower().Contains(search.ToLower()))
+                         .OrderBy(x => x.CID)
+                         .Skip((pageNo - 1) * pageSize)
+                         .Take(pageSize)
+                         .Include(x => x.Products)
+                         .ToList();
+                }
+                else
+                {
+                    return context.Categories
+                        .OrderBy(x => x.CID)
+                        .Skip((pageNo - 1) * pageSize)
+                        .Take(pageSize)
+                        .Include(x => x.Products)
+                        .ToList();
+                }
             }
         }
 
@@ -63,10 +105,10 @@ namespace MH.Services
         {
             using (var context = new MHDbContext())
             {
-                var category = context.Categories.Where(x => x.CID == ID).FirstOrDefault();
-                // var category = context.Categories.Where(x => x.CID == ID).Include(x => x.Products).FirstOrDefault();
+                //var category = context.Categories.Where(x => x.CID == ID).FirstOrDefault();
+                 var category = context.Categories.Where(x => x.CID == ID).Include(x => x.Products).FirstOrDefault();
 
-                //context.Products.RemoveRange(category.Products);  //first delete products of this category
+                context.Products.RemoveRange(category.Products);  //first delete products of this category
                 context.Categories.Remove(category);
                 context.SaveChanges();
             }

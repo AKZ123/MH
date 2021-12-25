@@ -1,0 +1,206 @@
+﻿@model MH.Web.ViewModels.CategorySearchViewModel
+@{
+    ViewBag.Title = "CategoryTable";
+}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
+
+<div>
+    <form method="post">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="form-group">
+                    <label>Search</label>
+                    <input class="form-control" id="searchTxt" name="search" value="@Model.SearchTerm" />
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Action</label>
+                    <div class="row">
+                        <div class="col-md-4 pr-0">
+                            <button class="btn btn-primary form-control" type="button" id="searchBtn">Search</button>
+                        </div>
+                        <div class="col-md-4 pr-0">
+                            <button class="btn btn-primary form-control" type="button" id="newBtn">New</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th class="font-weight-bold">Category Name</th>
+                <th class="font-weight-bold">Products</th>
+                <th class="font-weight-bold wrap-td">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Categories != null && Model.Categories.Count > 0)
+            {
+                foreach (var category in Model.Categories)
+                {
+                    <tr>
+                        <td>@category.Name</td>
+                        <td>
+                            @*<text>No Product.</text>*@
+                            @if (@category.Products.Count > 0)
+                            {
+                                <text> @category.Products.Count </text>
+                            }
+                            else
+                            {
+                                <text>No Product.</text>
+                            }
+                        </td>
+                        <td class="wrap-td">
+                            <button class="editBtn" data-id="@category.CID">Edit</button>
+                            <button class="deleteBtn" data-id="@category.CID">Delete</button>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr><td colspan="3" class="text-danger">No Categories found.</td></tr>
+            }
+        </tbody>
+    </table>
+    <div>
+        @if (Model.Pager != null && Model.Pager.TotalPages > 1)
+        {
+
+            if (Model.Pager.CurrentPage > 1)
+            {
+                <button class="pageButtons" data-pageno="1">First</button>
+                <button class="pageButtons" data-pageno="@(Model.Pager.CurrentPage - 1)">Previous</button>}
+
+            for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+            {
+                string activeClass = Model.Pager.CurrentPage == page ? "active bg-info" : string.Empty;
+
+
+                <button class="@activeClass pageButtons" data-pageno="@page">@page</button>}
+
+            if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+            {
+                <button class="pageButtons" data-pageno="@(Model.Pager.CurrentPage + 1)">Next</button>
+                <button class="pageButtons" data-pageno="@Model.Pager.EndPage">Last</button>}
+        }
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(".pageButtons").click(function () {
+        $.ajax({
+            url: '@Url.Action("CategoryTable", "Category")',
+            data: {
+                pageNo: $(this).attr("data-pageNo"),
+                search: '@Model.SearchTerm'
+                //search: $("#searchTxt").val();
+            }
+        })
+        .done(function (response) {
+            $("#tableContainer").html(response);
+        })
+        .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+            alert("FAIL");
+        });
+    });
+
+    $("#searchBtn").click(function () {
+        var searchValue = $("#searchTxt").val();
+
+        $.ajax({
+            url: '/Category/CategoryTable',
+            data: {
+                search: searchValue
+            }
+        })
+        .done(function (response) {
+            $("#tableContainer").html(response);
+        })
+        .fail(function (XMLHttpRequest, textStatus, erroeThrown) {
+            alert("Fail");
+        });
+    });
+
+
+    // New Create Section
+    $("#newBtn").click(function () {
+        //var searchValue = $("#searchTxt").val();
+
+        $.ajax({
+            url: '/Category/Create',
+        })
+        .done(function (response) {
+            $("#actionContainer").html(response);
+
+            focusAction("actionContainer");
+        })
+        .fail(function (XMLHttpRequest, textStatus, erroeThrown) {
+            alert("Fail");
+        });
+    });
+
+    //Edit section
+    $(".editBtn").click(function () {
+        //var searchValue = $("#searchTxt").val();
+
+        $.ajax({
+            url: '@Url.Action("Edit", "Category")',
+            data: {
+                ID: $(this).attr('data-id')
+            }
+        })
+        .done(function (response) {
+            $("#actionContainer").html(response);
+
+            focusAction("actionContainer");
+        })
+        .fail(function (XMLHttpRequest, textStatus, erroeThrown) {
+            alert("Fail");
+        });
+    });
+
+    //Delete section
+    $(".deleteBtn").click(function () {
+        //var searchValue = $("#searchTxt").val();
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this imaginary file!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+.then((willDelete) => {
+    if (willDelete) {
+        swal("Poof! Your imaginary file has been deleted!", {
+            icon: "success",
+        });
+        $.ajax({
+            type: 'POST',
+            url: '/Category/Delete',
+            data: {
+                ID: $(this).attr('data-id')
+            }
+        })
+        .done(function (response) {
+            $("#tableContainer").html(response);
+        })
+        .fail(function (XMLHttpRequest, textStatus, erroeThrown) {
+            alert("Fail");
+        });
+    }
+    else {
+        swal("Your imaginary file is safe!");
+        }
+    });
+});
+</script>
+
