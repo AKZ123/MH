@@ -89,19 +89,6 @@ namespace MH.Web.Controllers
         }
         // POST: Product/Edit/5
         [HttpPost]
-        public ActionResult Edit(Product product)
-        {
-            try
-            {
-                ProductsService.Instance.UpdateProduct(product);
-                return RedirectToAction("ProductTable");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-        [HttpPost]
         public ActionResult Edit(EditProductViewModel model)
         {
             var existingProduct = ProductsService.Instance.GetProduct(model.PID);
@@ -112,7 +99,7 @@ namespace MH.Web.Controllers
             existingProduct.DARNo = model.DARNo;
             existingProduct.PackSize = model.PackSize;
             existingProduct.Category = null; //mark it null. Because the referncy key is changed below
-            existingProduct.Category.CID = model.CategoryID;
+            existingProduct.CategoryID = model.CategoryID;
 
             //dont update imageURL if its empty
             if (!string.IsNullOrEmpty(model.ImageURL))
@@ -120,7 +107,14 @@ namespace MH.Web.Controllers
                 existingProduct.ImageURL = model.ImageURL;
             }
 
-            ProductsService.Instance.UpdateProduct(existingProduct);
+            try
+            {
+                ProductsService.Instance.UpdateProduct(existingProduct);
+            }
+            catch
+            {
+                return new HttpStatusCodeResult(500);
+            }
             return RedirectToAction("ProductTable");
         }
 

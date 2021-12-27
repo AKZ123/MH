@@ -21,6 +21,8 @@ namespace MH.Entities
         //public decimal MrpPrice { get; set; }
         public int PackSize { get; set; }
 
-        public Category Category { get; set; }
+
+        public int CategoryID { get; set; }
+        public virtual Category Category { get; set; }
     }
 }

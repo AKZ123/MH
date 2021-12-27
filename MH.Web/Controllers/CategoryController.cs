@@ -80,60 +80,51 @@ namespace MH.Web.Controllers
         }
 
         // GET: Category/Edit/5
-        public ActionResult Edit(int id)
+        [HttpGet]
+        public ActionResult Edit(int ID)
         {
-            var category = CategoriesService.Instance.GetCategory(id);
-            return View(category);
+            EditCategoryViewModel model = new EditCategoryViewModel();
+
+            var category = CategoriesService.Instance.GetCategory(ID);
+
+            model.ID = category.CID;
+            model.Name = category.Name;
+            model.Description = category.Description;
+            model.ImageURL = category.ImageURL;
+            //model.isFeatured = category.isFeatured;
+
+            return PartialView(model);
         }
 
         // POST: Category/Edit/5
         [HttpPost]
-        public ActionResult Edit(Category category)
+        public ActionResult Edit(EditCategoryViewModel model)
+        {
+            var existingCategory = CategoriesService.Instance.GetCategory(model.ID);
+            existingCategory.Name = model.Name;
+            existingCategory.Description = model.Description;
+            existingCategory.ImageURL = model.ImageURL;
+            //existingCategory.isFeatured = model.isFeatured;
+
+            CategoriesService.Instance.UpdateCategory(existingCategory);
+
+            return RedirectToAction("CategoryTable");
+        }
+       
+        // POST: Category/Delete/5
+        [HttpPost]
+        public ActionResult Delete(int ID)
         {
             try
             {
-                CategoriesService.Instance.UpdateCategory(category);
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+                CategoriesService.Instance.DeleteCategory(ID);
             }
             catch
             {
-                return View();
+                return new HttpStatusCodeResult(500);
             }
+            return RedirectToAction("CategoryTable");
         }
-
-        // GET: Category/Delete/5
-        public ActionResult Delete(int id)
-        {
-            var category = CategoriesService.Instance.GetCategory(id);
-            return View(category);
-        }
-
-
-        [HttpPost]
-        public ActionResult Delete(Category category)
-        {
-            CategoriesService.Instance.DeleteCategory(category.CID);
-
-            return RedirectToAction("Index");
-        }
-
-        // POST: Category/Delete/5
-        //[HttpPost]
-        //public ActionResult Delete(int id, FormCollection collection)
-        //{
-        //    try
-        //    {
-        //        // TODO: Add delete logic here
-
-        //        return RedirectToAction("Index");
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
-        //}
 
     }
 }
