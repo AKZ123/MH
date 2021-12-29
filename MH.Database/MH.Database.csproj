@@ -68,6 +68,10 @@
     <Compile Include="Migrations\202112271913304_CIDinProduct.designer.cs">
       <DependentUpon>202112271913304_CIDinProduct.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202112281142083_companyAdd.cs" />
+    <Compile Include="Migrations\202112281142083_companyAdd.designer.cs">
+      <DependentUpon>202112281142083_companyAdd.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -93,6 +97,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202112271913304_CIDinProduct.resx">
       <DependentUpon>202112271913304_CIDinProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202112281142083_companyAdd.resx">
+      <DependentUpon>202112281142083_companyAdd.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

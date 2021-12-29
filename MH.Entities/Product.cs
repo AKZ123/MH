@@ -24,5 +24,8 @@ namespace MH.Entities
 
         public int CategoryID { get; set; }
         public virtual Category Category { get; set; }
+
+        public int CompanyID { get; set; }
+        public virtual Company Company { get; set; }
     }
 }

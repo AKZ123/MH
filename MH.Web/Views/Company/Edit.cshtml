@@ -1,0 +1,53 @@
+﻿@model MH.Web.ViewModels.EditCompanyViewModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+<h2>Edit Company</h2>
+<form id="editCompany">
+    <input type="hidden" name="CmpnyID" value="@Model.CmpnyID" />
+    <div class="row">
+        <div class="col-md-8">
+            <div class="form-group">
+                <label>Company short name</label>
+                <input class="form-control" name="CmpName" value="@Model.CmpName" />
+            </div>
+            <div class="form-group">
+                <label>Company Register Name</label>
+                <input class="form-control" name="CRegisterName" value="@Model.CRegisterName" />
+            </div>
+            <div class="form-group">
+                <label>Address</label>
+                <input class="form-control" name="Address" value="@Model.Address" />
+            </div>
+        </div>
+        @*<div class="col-md-4">
+            <div class="thumb">
+                <img src="@imageURL" class="img-thumbnail img-fluid" id="categoryImage" />
+            </div>
+        </div>*@
+    </div>
+    <button id="updateBtn" type="button" class="btn btn-primary">Update</button>
+    <button id="cancelBtn" type="button" class="btn btn-primary">Cancel</button>
+</form>
+<script>
+    $("#updateBtn").click(function () {
+		$.ajax({
+			type: 'POST',
+			url: '@Url.Action("Edit", "Company")',
+            data: $("#editCompany").serialize()
+		})
+        .done(function (response) {
+            $("#tableContainer").html(response);
+            $("#actionContainer").html("");
+            focusAction("tableContainer");
+        })
+        .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+        	alert("FAIL");
+        });
+	});
+    $("#cancelBtn").click(function () {
+	    $("#actionContainer").html("");
+		focusAction("tableContainer");
+	});
+</script>
