@@ -59,6 +59,7 @@ namespace MH.Services
                 }
             }
         }
+        // in Product create////
         public List<Company> GetAllCompanies()
         {
             using (var context = new MHDbContext())

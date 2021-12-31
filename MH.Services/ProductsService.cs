@@ -47,6 +47,7 @@ namespace MH.Services
             //  use   ( Reposetory)
             using (var context = new MHDbContext())
             {
+                context.Entry(product.Company).State = System.Data.Entity.EntityState.Unchanged;
                 context.Entry(product.Category).State = System.Data.Entity.EntityState.Unchanged;
                 context.Products.Add(product);
                 context.SaveChanges();
@@ -64,7 +65,8 @@ namespace MH.Services
         {
             using (var context = new MHDbContext())
             {
-                return context.Products.Where(x => x.PID == ID).Include(x => x.Category).FirstOrDefault();
+                return context.Products.Where(x => x.PID == ID).Include(x => x.Category).Include(x => x.Company).FirstOrDefault();
+                //return context.Products.Where(x => x.PID == ID).Include(x => x.Category).FirstOrDefault();
                 //return context.Products.Find(ID);
             }
         }
@@ -81,6 +83,7 @@ namespace MH.Services
                          .OrderBy(x => x.PID)
                          .Skip((pageNo - 1) * pageSize).Take(pageSize)
                          .Include(x => x.Category)
+                         .Include(x => x.Company)
                          .ToList();
                 }
                 else
@@ -90,6 +93,7 @@ namespace MH.Services
                         .Skip((pageNo - 1) * pageSize)
                         .Take(pageSize)
                         .Include(x => x.Category)
+                        .Include(x => x.Company)
                         .ToList();
                 }
             }

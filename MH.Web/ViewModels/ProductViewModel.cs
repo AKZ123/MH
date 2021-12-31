@@ -24,7 +24,9 @@ namespace MH.Web.ViewModels
         public string ImageURL { get; set; }
         public int PackSize { get; set; }
         public int CategoryID { get; set; }
+        public int CompanyID { get; set; }
         public List<Category> AvailableCategories { get; set; }
+        public List<Company> AvailableCompanies { get; set; }
     }
     public class EditProductViewModel
     {
@@ -38,6 +40,8 @@ namespace MH.Web.ViewModels
         public int PackSize { get; set; }
         public int CategoryID { get; set; }
         public List<Category> AvailableCategories { get; set; }
+        public int CompanyID { get; set; }
+        public List<Company> AvailableCompanies { get; set; }
     }
     public class ProductViewModel
     {

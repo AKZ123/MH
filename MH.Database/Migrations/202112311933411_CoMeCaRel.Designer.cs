@@ -7,13 +7,13 @@ namespace MH.Database.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class Initialize : IMigrationMetadata
+    public sealed partial class CoMeCaRel : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Initialize));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(CoMeCaRel));
         
         string IMigrationMetadata.Id
         {
-            get { return "202109280808165_Initialize"; }
+            get { return "202112311933411_CoMeCaRel"; }
         }
         
         string IMigrationMetadata.Source
