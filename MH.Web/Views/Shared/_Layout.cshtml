@@ -143,6 +143,12 @@
                                         <a class="nav-link" href="401.html">401 Page</a>
                                         <a class="nav-link" href="404.html">404 Page</a>
                                         <a class="nav-link" href="500.html">500 Page</a>
+                                        @Html.ActionLink("Home for General Customer", "Index", "Home", new { area = "" }, new { @class = "nav-link" })
+                                        @Html.ActionLink("Shortcuts-> Trending", "Index", "Home", new { area = "" }, new { @class = "nav-link" })
+                                        @Html.ActionLink("Shortcuts-> Flash", "Index", "Home", new { area = "" }, new { @class = "nav-link" })
+                                        @Html.ActionLink("Shortcuts-> My Ordered", "Index", "Home", new { area = "" }, new { @class = "nav-link" })
+                                        @Html.ActionLink("Shortcuts-> Best Sale", "Index", "Home", new { area = "" }, new { @class = "nav-link" })
+                                        @Html.ActionLink("Cart/Bag", "Index", "Home", new { area = "" }, new { @class = "nav-link" })
                                     </nav>
                                 </div>
                             </nav>
@@ -216,6 +222,8 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Scripts/jquery.validate.min.js"></script>
+
+    <script src="~/Content/js/jquery.cookie.js"></script>
 
 </body>
 </html>

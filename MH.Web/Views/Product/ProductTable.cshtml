@@ -57,43 +57,43 @@
 
                 foreach (var product in Model.Products)
                 {
-            <tr>
-                <td>@product.BrandName</td>
-                <td>@product.Strength</td>
-                <td>@product.GenericName</td>
-                <td>@product.MfgLicNo</td>
-                <td>@product.DARNo</td>
-                @*<td>@product.ImageURL</td>*@
-                <td>@product.PackSize</td>
-                <td>
-                    @if (product.Company != null)
-                    {
-                        <text>@product.Company.CRegisterName</text>
-                    }
-                    else
-                    {
-                        <text>-</text>
-                    }
-                </td>
-                <td>
-                    @if (product.Category != null)
-                    {
-                        <text>@product.Category.Name</text>
-                    }
-                    else
-                    {
-                        <text>-</text>
-                    }
-                </td>
-                <td class="wrap-td">
-                    <button class="editBtn" data-id="@product.PID">Edit</button>
-                    <button class="deleteBtn" data-id="@product.PID">Delete</button>
-                    @*<button class="addtoCart" data-id="@product.PID">Add To Cart</button>
+                   <tr>
+                       <td>@product.BrandName</td>
+                       <td>@product.Strength</td>
+                       <td>@product.GenericName</td>
+                       <td>@product.MfgLicNo</td>
+                       <td>@product.DARNo</td>
+                       @*<td>@product.ImageURL</td>*@
+                       <td>@product.PackSize</td>
+                       <td>
+                           @if (product.Company != null)
+                           {
+                               <text>@product.Company.CRegisterName</text>
+                           }
+                           else
+                           {
+                               <text>-</text>
+                           }
+                       </td>
+                       <td>
+                           @if (product.Category != null)
+                           {
+                               <text>@product.Category.Name</text>
+                           }
+                           else
+                           {
+                               <text>-</text>
+                           }
+                       </td>
+                       <td class="wrap-td">
+                           <button class="editBtn" data-id="@product.PID">Edit</button>
+                           <button class="deleteBtn" data-id="@product.PID">Delete</button>
+                           <button class="addtoCart" data-id="@product.PID">Add To Cart</button>
 
-            <button class="ScreperBtn" data-id="@product.PID">Add a Compare Link</button>*@
+                           @* <button class="ScreperBtn" data-id="@product.PID">Add a Compare Link</button>*@
 
-                </td>
-            </tr>
+                       </td>
+                   </tr>
                 }
             }
             else

@@ -121,5 +121,12 @@ namespace MH.Services
             }
         }
 
+        public List<Product> GetProducts(List<int> IDs)
+        {
+            using (var context = new MHDbContext())
+            {
+                return context.Products.Where(Product => IDs.Contains(Product.PID)).ToList();
+            }
+        }
     }
 }
