@@ -26,6 +26,45 @@ namespace MH.Services
 
         }
 
+        public int SearchProductsCount(string searchTerm, int? minimumPrice, int? maximumPrice, int? categoryID, int? sortBy)
+        {
+            using (var context = new MHDbContext())
+            {
+                var products = context.Products.ToList();
+                if (categoryID.HasValue)
+                {
+                    products = products.Where(x => x.Category.CID == categoryID.Value).ToList();
+                }
+                if (!string.IsNullOrEmpty(searchTerm))
+                {
+                    products = products.Where(x => x.BrandName.ToLower().Contains(searchTerm.ToLower())).ToList();
+                }
+                //if (minimumPrice.HasValue)
+                //{
+                //    products = products.Where(x => x.Price >= minimumPrice.Value).ToList();
+                //}
+                //if (maximumPrice.HasValue)
+                //{
+                //    products = products.Where(x => x.Price <= maximumPrice.Value).ToList();
+                //}
+                //if (sortBy.HasValue)
+                //{
+                //    switch (sortBy.Value)
+                //    {
+                //        case 2:
+                //            products = products.OrderByDescending(x => x.ID).ToList();
+                //            break;
+                //        case 3:
+                //            products = products.OrderBy(x => x.Price).ToList();
+                //            break;
+                //        default:
+                //            products = products.OrderByDescending(x => x.Price).ToList();
+                //            break;
+                //    }
+                //}
+                return products.Count;
+            }
+        }
         public int GetProductsCount(string search)
         {
             using (var context = new MHDbContext())

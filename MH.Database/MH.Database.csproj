@@ -52,9 +52,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MHDbContext.cs" />
-    <Compile Include="Migrations\202112311933411_CoMeCaRel.cs" />
-    <Compile Include="Migrations\202112311933411_CoMeCaRel.designer.cs">
-      <DependentUpon>202112311933411_CoMeCaRel.cs</DependentUpon>
+    <Compile Include="Migrations\202201061509474_ComMediCa.cs" />
+    <Compile Include="Migrations\202201061509474_ComMediCa.designer.cs">
+      <DependentUpon>202201061509474_ComMediCa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202201120742317_AddBatchAndState.cs" />
+    <Compile Include="Migrations\202201120742317_AddBatchAndState.designer.cs">
+      <DependentUpon>202201120742317_AddBatchAndState.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -70,8 +74,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202112311933411_CoMeCaRel.resx">
-      <DependentUpon>202112311933411_CoMeCaRel.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202201061509474_ComMediCa.resx">
+      <DependentUpon>202201061509474_ComMediCa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202201120742317_AddBatchAndState.resx">
+      <DependentUpon>202201120742317_AddBatchAndState.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

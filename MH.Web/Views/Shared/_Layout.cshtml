@@ -94,6 +94,20 @@
             <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                 <div class="sb-sidenav-menu">
                     <div class="nav">
+
+                        @*....Start...*@
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" href="layout-static.html">Static Navigation</a>
+                            <a class="nav-link" href="layout-sidenav-light.html">Light Sidenav</a>
+                            @Html.ActionLink("Home for General Customer", "Index", "Home", new { area = "" }, new { @class = "nav-link" })
+                            @Html.ActionLink("Shortcuts-> Trending", "Index", "Home", new { area = "" }, new { @class = "nav-link" })
+                            @Html.ActionLink("Shortcuts-> Flash", "Index", "Home", new { area = "" }, new { @class = "nav-link" })
+                            @Html.ActionLink("Shortcuts-> My Ordered", "Index", "Home", new { area = "" }, new { @class = "nav-link" })
+                            @Html.ActionLink("Shortcuts-> Best Sale", "Index", "Home", new { area = "" }, new { @class = "nav-link" })
+                            @Html.ActionLink("Cart/Bag", "Index", "Home", new { area = "" }, new { @class = "nav-link" })
+                        </nav>
+                        @*....End...*@
+
                         <div class="sb-sidenav-menu-heading">Core</div>
                         <a class="nav-link" href="index.html">
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>

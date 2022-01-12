@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,9 +24,14 @@ namespace MH.Entities
 
 
         public int CategoryID { get; set; }
+        [ForeignKey("CategoryID")]
         public virtual Category Category { get; set; }
 
         public int CompanyID { get; set; }
+        [ForeignKey("CompanyID")]
         public virtual Company Company { get; set; }
+
+        public List<Batch> Batches { get; set; }
+        public IList<ProductState> ProductStates { get; set; }
     }
 }

@@ -37,28 +37,8 @@ namespace MH.Web.Controllers
         //        _userManager = value;
         //    }
         //}
-        //// GET: Shop
-        //public ActionResult Index(string searchTerm, int? minimumPrice, int? maximumPrice, int? categoryID, int? sortBy, int? pageNo)
-        //{
-        //    var pageSize = 6;
+        // GET: Shop
 
-        //    ShopViewModel model = new ShopViewModel();
-
-        //    model.SearchTerm = searchTerm;
-        //    model.FeaturedCategories = CategoriesService.Instance.GetFeaturedCategories();
-        //    model.MaximumPrice = ProductsService.Instance.GetMaximumPrice();
-
-        //    pageNo = pageNo.HasValue ? pageNo.Value > 0 ? pageNo.Value : 1 : 1;
-        //    //var sort = (SortByEnums)sortBy.Value;
-        //    model.sortBy = sortBy;
-        //    model.CategoryID = categoryID;
-
-        //    int totalCount = ProductsService.Instance.SearchProductsCount(searchTerm, minimumPrice, maximumPrice, categoryID, sortBy);
-        //    model.Products = ProductsService.Instance.SearchProducts(searchTerm, minimumPrice, maximumPrice, categoryID, sortBy, pageNo.Value, pageSize);
-
-        //    model.Pager = new Pager(totalCount, pageNo, pageSize);
-        //    return View(model);
-        //}
 
         //public ActionResult FilterProducts(string searchTerm, int? minimumPrice, int? maximumPrice, int? categoryID, int? sortBy, int? pageNo)
         //{

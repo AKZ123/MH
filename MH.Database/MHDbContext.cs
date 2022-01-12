@@ -18,7 +18,9 @@ namespace MH.Database
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Company> Companies { get; set; }
-
+        public DbSet<Batch> Batches { get; set; }
+        public DbSet<State> States { get; set; }
+        public DbSet<ProductState> ProductState { get; set; }
 
     }
 }

@@ -3,7 +3,7 @@
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class CoMeCaRel : DbMigration
+    public partial class ComMediCa : DbMigration
     {
         public override void Up()
         {
@@ -32,14 +32,12 @@
                         PackSize = c.Int(nullable: false),
                         CategoryID = c.Int(nullable: false),
                         CompanyID = c.Int(nullable: false),
-                        Category_CID = c.Int(),
-                        Company_CmpnyID = c.Int(),
                     })
                 .PrimaryKey(t => t.PID)
-                .ForeignKey("dbo.Categories", t => t.Category_CID)
-                .ForeignKey("dbo.Companies", t => t.Company_CmpnyID)
-                .Index(t => t.Category_CID)
-                .Index(t => t.Company_CmpnyID);
+                .ForeignKey("dbo.Categories", t => t.CategoryID, cascadeDelete: true)
+                .ForeignKey("dbo.Companies", t => t.CompanyID, cascadeDelete: true)
+                .Index(t => t.CategoryID)
+                .Index(t => t.CompanyID);
             
             CreateTable(
                 "dbo.Companies",
@@ -56,10 +54,10 @@
         
         public override void Down()
         {
-            DropForeignKey("dbo.Products", "Company_CmpnyID", "dbo.Companies");
-            DropForeignKey("dbo.Products", "Category_CID", "dbo.Categories");
-            DropIndex("dbo.Products", new[] { "Company_CmpnyID" });
-            DropIndex("dbo.Products", new[] { "Category_CID" });
+            DropForeignKey("dbo.Products", "CompanyID", "dbo.Companies");
+            DropForeignKey("dbo.Products", "CategoryID", "dbo.Categories");
+            DropIndex("dbo.Products", new[] { "CompanyID" });
+            DropIndex("dbo.Products", new[] { "CategoryID" });
             DropTable("dbo.Companies");
             DropTable("dbo.Products");
             DropTable("dbo.Categories");
