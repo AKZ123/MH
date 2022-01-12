@@ -21,5 +21,7 @@ namespace MH.Entities
         [ForeignKey("ProductId")]
         public virtual Product Product { get; set; }
 
+        public virtual IList<OrderItem> OrderItems { get; set; }
+
     }
 }
