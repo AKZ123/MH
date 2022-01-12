@@ -21,6 +21,8 @@ namespace MH.Database
         public DbSet<Batch> Batches { get; set; }
         public DbSet<State> States { get; set; }
         public DbSet<ProductState> ProductState { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderItem> OrderItem { get; set; }
 
     }
 }

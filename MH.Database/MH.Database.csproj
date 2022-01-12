@@ -60,6 +60,10 @@
     <Compile Include="Migrations\202201120742317_AddBatchAndState.designer.cs">
       <DependentUpon>202201120742317_AddBatchAndState.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202201120856018_AddOrderwithBatch.cs" />
+    <Compile Include="Migrations\202201120856018_AddOrderwithBatch.designer.cs">
+      <DependentUpon>202201120856018_AddOrderwithBatch.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -79,6 +83,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202201120742317_AddBatchAndState.resx">
       <DependentUpon>202201120742317_AddBatchAndState.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202201120856018_AddOrderwithBatch.resx">
+      <DependentUpon>202201120856018_AddOrderwithBatch.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
