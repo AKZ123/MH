@@ -1,0 +1,91 @@
+﻿@model MH.Web.ViewModels.NewDivisionViewModel
+@{
+    ViewBag.Title = "Division";
+}
+<h2>Add a Division</h2>
+<form id="createDivision">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="form-group">
+                <label>Country Name</label>
+                <select class="form-control" name="CountryID" required>
+                        <option value="" selected disabled>Select.... Country</option>
+                    @foreach (var country in Model.AvailableCountries)
+                    {
+                        <option value="@country.CountryID">@country.Name</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Division Name</label>
+                <input class="form-control" name="Name" />
+            </div>
+            
+            <button id="saveBtn" type="button" class="btn btn-primary">Save</button>
+            <button id="cancelBtn" type="button" class="btn btn-primary">Cancel</button>
+        </div>
+     
+    </div>
+</form>
+<script>
+	//$('#createProduct').validate({
+	//	rules: {
+	//		Name: {
+	//			required: true,
+	//			minlength: 5,
+	//			maxlength: 50,
+	//		},
+	//		Description: {
+	//			maxlength: 500
+	//		},
+	//		Price: {
+	//			range: [1, 100000]
+	//		}
+	//	},
+	//	messages: {
+	//		Name: {
+	//			required: 'Name is required',
+	//			minlength: 'Minimum Length is 5',
+	//			maxlength: 'Maximum Length is 50'
+	//		},
+	//		Description: {
+	//			maxlength: 'Maximum Length is 500'
+	//		},
+	//		Price: {
+	//			range: 'Price must be within range of 1 - 100000.'
+	//		}
+	//	}
+	//});
+
+	$("#saveBtn").click(function () {
+		//if ($("#createProduct").valid()) {
+			$.ajax({
+				type: 'POST',
+				url: '@Url.Action("Create", "Division")',
+                data: $("#createDivision").serialize()
+			})
+			.done(function (response) {
+				$("#tableContiner").html(response);
+				$("#actionContainer").html("");
+				focusAction("tableContiner");
+			})
+			.fail(function (XMLHttpRequest, textStatus, errorThrown) {
+				alert("FAIL");
+			});
+		//}
+		//else {
+		//	swal({
+		//		title: "Warning",
+		//		text: "Please enter all valid data in fields.",
+		//		icon: "warning",
+		//		buttons: true,
+		//		dangerMode: true,
+		//	});
+		//}
+	});
+	$("#cancelBtn").click(function () {
+        $("#actionContainer").html("");
+        focusAction("tableContiner");
+	});
+</script>
+

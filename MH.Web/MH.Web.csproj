@@ -171,11 +171,15 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\CompanyController.cs" />
+    <Compile Include="Controllers\CountryController.cs" />
+    <Compile Include="Controllers\DistrictController.cs" />
+    <Compile Include="Controllers\DivisionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\SharedController.cs" />
     <Compile Include="Controllers\ShopController.cs" />
+    <Compile Include="Controllers\UpazilaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -186,6 +190,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\CategoryViewModels.cs" />
     <Compile Include="ViewModels\CompanyViewModel.cs" />
+    <Compile Include="ViewModels\AddressViewModels.cs" />
     <Compile Include="ViewModels\HomeViewModels.cs" />
     <Compile Include="ViewModels\ProductViewModel.cs" />
     <Compile Include="ViewModels\SharedViewModels.cs" />
@@ -269,10 +274,27 @@
     <Content Include="Views\Company\Create.cshtml" />
     <Content Include="Views\Company\Edit.cshtml" />
     <Content Include="Views\Shop\Checkout.cshtml" />
+    <Content Include="Views\Country\Index.cshtml" />
+    <Content Include="Views\Country\CountryTable.cshtml" />
+    <Content Include="Views\Country\Create.cshtml" />
+    <Content Include="Views\Country\Edit.cshtml" />
+    <Content Include="Views\Division\Index.cshtml" />
+    <Content Include="Views\Division\DivisionTable.cshtml" />
+    <Content Include="Views\Division\Create.cshtml" />
+    <Content Include="Views\Division\Edit.cshtml" />
+    <Content Include="Views\District\Index.cshtml" />
+    <Content Include="Views\District\DistrictTable.cshtml" />
+    <Content Include="Views\District\Create.cshtml" />
+    <Content Include="Views\District\Edit.cshtml" />
+    <Content Include="Views\Upazila\Index.cshtml" />
+    <Content Include="Views\Upazila\UpazilaTable.cshtml" />
+    <Content Include="Views\Upazila\Create.cshtml" />
+    <Content Include="Views\Upazila\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\image\Uplod\" />
+    <Folder Include="Views\Address\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

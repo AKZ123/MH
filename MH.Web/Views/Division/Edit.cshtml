@@ -1,0 +1,88 @@
+﻿@model MH.Web.ViewModels.EditDivisionViewModel
+@{
+    ViewBag.Title = "Edit";
+}
+<h2>Edit Division</h2>
+<form id="editDivision">
+    <input type="hidden" name="DivisionID" value="@Model.DivisionID" />
+    <div class="row">
+        <div class="col-md-8">
+            <div class="form-group">
+                <label>Country Name</label>
+                <select class="form-control" name="CountryId">
+                    @foreach (var division in Model.AvailableCountries)
+                    {
+                        var selected = division.CountryID == Model.CountryId ? "selected" : string.Empty;
+                        <option value="@division.CountryID" @selected>@division.Name</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Division Name</label>
+                <input class="form-control" name="Name" value="@Model.Name" />
+            </div>
+            
+            <button id="updateBtn" type="button" class="btn btn-primary">Update</button>
+            <button id="cancelBtn" type="button" class="btn btn-primary">Cancel</button>
+        </div>
+        <div class="col-md-4">
+            <div class="thumb">
+                @*<img class="img-thumbnail img-fluid" id="productImage" src="@imageURL" />*@
+            </div>
+        </div>
+    </div>
+</form>
+<script>
+    $('#editDivision').validate({
+		rules: {
+			Name: {
+				required: true,
+				minlength: 1,
+				maxlength: 50,
+			},
+            CountryId: {
+                required: true
+			}
+		},
+		messages: {
+			Name: {
+				required: 'Name is required',
+				minlength: 'Minimum Length is 1',
+				maxlength: 'Maximum Length is 50'
+			}
+		}
+	});
+
+	$("#updateBtn").click(function () {
+        if ($("#editDivision").valid()) {
+			$.ajax({
+				type: 'POST',
+				url: '@Url.Action("Edit", "Division")',
+                data: $("#editDivision").serialize()
+			})
+			.done(function (response) {
+				$("#tableContiner").html(response);
+				$("#actionContainer").html("");
+				focusAction("tableContiner");
+			})
+			.fail(function (XMLHttpRequest, textStatus, errorThrown) {
+				alert("FAIL");
+			});
+		}
+		else {
+			swal({
+				title: "Warning",
+				text: "Please enter all valid data in fields.",
+				icon: "warning",
+				buttons: true,
+				dangerMode: true,
+			});
+		}
+	});
+	$("#cancelBtn").click(function () {
+		$("#actionContainer").html("");
+		focusAction("tableContiner");
+	});
+</script>
+
+

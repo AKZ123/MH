@@ -1,0 +1,225 @@
+﻿@model MH.Web.ViewModels.DistrictSearchViewModel
+
+@{
+    ViewBag.Title = "DistrictTable";
+}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
+
+<div>
+    <form method="post">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="form-group">
+                    <label>Search</label>
+                    <input class="form-control" id="searchTxt" name="Search" value="@Model.SearchTerm" />
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Action</label>
+                    <div class="row">
+                        <div class="col-md-4 pr-0">
+                            <button class="btn btn-primary form-control" type="button" id="searchBtn">Search</button>
+                        </div>
+                        <div class="col-md-4 pr-0">
+                            <button class="btn btn-primary form-control" type="button" id="resetBtn">Reset</button>
+                        </div>
+                        <div class="col-md-4 pr-0">
+                            <button class="btn btn-primary form-control" type="button" id="newBtn">New</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div>
+    <table id="DistrictsTable" class="table table-striped">
+        <thead>
+            <tr>
+                <th class="font-weight-bold">Division Name</th>
+                <th class="font-weight-bold">District Name*</th>
+                <th class="font-weight-bold">Upazila Nomber</th>
+                <th class="font-weight-bold wrap-td">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Districts != null && Model.Districts.Count > 0)
+            {
+
+                foreach (var district in Model.Districts)
+                {
+                    <tr>
+                        <td>@district.Division.Name</td>
+                        <td>@district.Name</td>
+                        <td>
+                            @if (district.Upazila != null)
+                            {
+                                <text>@district.Upazila.Count()</text>
+                            }
+                            else
+                            {
+                                <text>-</text>
+                            }
+                        </td>
+                        <td class="wrap-td">
+                            <button class="editBtn" data-id="@district.DistrictID">Edit</button>
+                            <button class="deleteBtn" data-id="@district.DistrictID">Delete</button>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td class="text-danger" colspan="4">No District found.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div>
+        @if (Model.Pager != null && Model.Pager.TotalPages > 1)
+        {
+
+            if (Model.Pager.CurrentPage > 1)
+            {
+                <button class="pageButtons" data-pageno="1">First</button>
+                <button class="pageButtons" data-pageno="@(Model.Pager.CurrentPage - 1)">Previous</button>
+            }
+
+            for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+            {
+                string activeClass = Model.Pager.CurrentPage == page ? "active bg-info" : string.Empty;
+
+
+                <button class="@activeClass pageButtons" data-pageno="@page">@page</button>
+            }
+
+            if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+            {
+                <button class="pageButtons" data-pageno="@(Model.Pager.CurrentPage + 1)">Next</button>
+                <button class="pageButtons" data-pageno="@Model.Pager.EndPage">Last</button>
+            }
+        }
+    </div>
+</div>
+<script>
+
+	$(".pageButtons").click(function () {
+		$.ajax({
+			url: '@Url.Action("DistrictTable", "District")',
+			data: {
+			    pageNo : $(this).attr("data-pageno")
+			}
+		})
+        .done(function (response) {
+        	$("#tableContiner").html(response);
+        })
+        .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+        	alert("FAIL");
+        });
+	});
+
+	$("#searchBtn").click(function () {
+		var searchValue = $("#searchTxt").val();
+
+		$.ajax({
+			url: '@Url.Action("DistrictTable", "District")',
+			data: {
+				search: searchValue
+			}
+		})
+        .done(function (response) {
+        	$("#tableContiner").html(response);
+        })
+        .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+        	alert("FAIL");
+        });
+	});
+
+	$("#resetBtn").click(function () {
+		var searchValue = '';
+
+		$.ajax({
+			url: '@Url.Action("DistrictTable", "District")',
+			data: {
+				search: searchValue
+			}
+		})
+        .done(function (response) {
+        	$("#tableContiner").html(response);
+        })
+        .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+        	alert("FAIL");
+        });
+	});
+
+	$("#newBtn").click(function () {
+		$.ajax({
+			url: '@Url.Action("Create", "District")',
+		})
+        .done(function (response) {
+        	$("#actionContainer").html(response);
+
+        	focusAction("actionContainer");
+        })
+        .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+        	alert("FAIL");
+        });
+	});
+
+	$(".editBtn").click(function () {
+		$.ajax({
+			url: '@Url.Action("Edit", "District")',
+			data: {
+				ID: $(this).attr('data-id')
+			}
+		})
+        .done(function (response) {
+        	$("#actionContainer").html(response);
+
+        	focusAction("actionContainer");
+        })
+        .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+        	alert("FAIL");
+        });
+	});
+
+	$(".deleteBtn").click(function () {
+
+		swal({
+			title: "Confirm?",
+			text: "Are you sure you want to delete this product?",
+			icon: "warning",
+			buttons: true,
+			dangerMode: true,
+		})
+		.then((willDelete) => {
+			if (willDelete) {
+				$.ajax({
+					type: 'POST',
+					url: '@Url.Action("Delete", "District")',
+					data: {
+						ID: $(this).attr('data-id')
+					}
+				})
+				.done(function (response) {
+					$("#tableContiner").html(response);
+
+					swal("Record deleted Successfully.", {
+						icon: "success",
+					});
+				})
+				.fail(function (XMLHttpRequest, textStatus, errorThrown) {
+					alert("FAIL");
+				});
+
+			}
+		});
+	});
+
+</script>
+
+

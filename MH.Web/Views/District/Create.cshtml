@@ -1,0 +1,74 @@
+﻿@model MH.Web.ViewModels.NewDistrictViewModel
+@{
+    ViewBag.Title = "Create";
+}
+<h2>Create District</h2>
+<form id="createDistrict">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="form-group">
+                <label>Division Name</label>
+                <select class="form-control" name="DivisionID">
+                    <option value="" selected disabled>Select.... </option>
+                    @foreach (var division in Model.AvailableDivisions)
+                    {
+                        <option value="@division.DivisionID">@division.Name</option>
+                    }
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label>District Name</label>
+                <input class="form-control" name="Name" />
+            </div>
+            <button id="saveBtn" type="button" class="btn btn-primary">Save</button>
+            <button id="cancelBtn" type="button" class="btn btn-primary">Cancel</button>
+        </div>
+    </div>
+</form>
+<script>
+	$('#createDistrict').validate({
+		rules: {
+			Name: {
+				required: true,
+				minlength: 1,
+				maxlength: 50,
+			},
+            DivisionID: {
+                required: true
+			}
+		},
+		messages: {
+			Name: {
+				required: 'Name is required',
+				minlength: 'Minimum Length is 1',
+				maxlength: 'Maximum Length is 50'
+			},
+            DivisionID: {
+                maxlength: 'Select  Division'
+			}
+		}
+	});
+	$("#saveBtn").click(function () {
+		if ($("#createDistrict").valid()) {
+			$.ajax({
+				type: 'POST',
+				url: '@Url.Action("Create", "District")',
+				data: $("#createDistrict").serialize()
+			})
+				.done(function (response) {
+					$("#tableContiner").html(response);
+					$("#actionContainer").html("");
+					focusAction("tableContiner");
+				})
+				.fail(function (XMLHttpRequest, textStatus, errorThrown) {
+					alert("FAIL");
+				});
+		}
+	});
+	$("#cancelBtn").click(function () {
+        $("#actionContainer").html("");
+        focusAction("tableContiner");
+	});
+</script>
+

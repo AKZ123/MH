@@ -64,6 +64,18 @@
     <Compile Include="Migrations\202201120856018_AddOrderwithBatch.designer.cs">
       <DependentUpon>202201120856018_AddOrderwithBatch.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202201121437500_addCountryDisUpaz.cs" />
+    <Compile Include="Migrations\202201121437500_addCountryDisUpaz.designer.cs">
+      <DependentUpon>202201121437500_addCountryDisUpaz.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202201121510367_addCDivisionD.cs" />
+    <Compile Include="Migrations\202201121510367_addCDivisionD.designer.cs">
+      <DependentUpon>202201121510367_addCDivisionD.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202201131333479_AddCountryEntity.cs" />
+    <Compile Include="Migrations\202201131333479_AddCountryEntity.designer.cs">
+      <DependentUpon>202201131333479_AddCountryEntity.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -86,6 +98,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202201120856018_AddOrderwithBatch.resx">
       <DependentUpon>202201120856018_AddOrderwithBatch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202201121437500_addCountryDisUpaz.resx">
+      <DependentUpon>202201121437500_addCountryDisUpaz.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202201121510367_addCDivisionD.resx">
+      <DependentUpon>202201121510367_addCDivisionD.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202201131333479_AddCountryEntity.resx">
+      <DependentUpon>202201131333479_AddCountryEntity.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

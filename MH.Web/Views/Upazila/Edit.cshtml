@@ -1,0 +1,92 @@
+﻿@model MH.Web.ViewModels.EditUpazilaViewModel
+@{
+    ViewBag.Title = "Edit";
+}
+<h2>Edit Upazila</h2>
+<form id="editUpazila">
+    <input type="hidden" name="UpazilaID" value="@Model.UpazilaID" />
+    <div class="row">
+        <div class="col-md-8">
+            <div class="form-group">
+                <label>District Name</label>
+                <select class="form-control" name="DistrictID">
+                    @foreach (var district in Model.AvailableDistricts)
+                    {
+                        var selected = district.DistrictID == Model.DistrictID ? "selected" : string.Empty;
+                        <option value="@district.DistrictID" @selected>@district.Name</option>
+                    }
+                </select>
+            </div>
+           
+            <div class="form-group">
+                <label>Name</label>
+                <input class="form-control" name="Name" value="@Model.Name" />
+            </div>
+            
+            <button id="updateBtn" type="button" class="btn btn-primary">Update</button>
+            <button id="cancelBtn" type="button" class="btn btn-primary">Cancel</button>
+        </div>
+        <div class="col-md-4">
+            <div class="thumb">
+                @*<img class="img-thumbnail img-fluid" id="productImage" src="@imageURL" />*@
+            </div>
+        </div>
+    </div>
+</form>
+<script>
+    $('#editUpazila').validate({
+		rules: {
+			Name: {
+				required: true,
+				minlength: 5,
+				maxlength: 50,
+			},
+            DistrictID: {
+                required: true
+			}
+		},
+		messages: {
+			Name: {
+				required: 'Name is required',
+				minlength: 'Minimum Length is 1',
+				maxlength: 'Maximum Length is 50'
+			},
+            DistrictID: {
+                required: 'District is required'
+			}
+		}
+	});
+
+	$("#updateBtn").click(function () {
+        if ($("#editUpazila").valid()) {
+			$.ajax({
+				type: 'POST',
+				url: '@Url.Action("Edit", "Upazila")',
+                data: $("#editUpazila").serialize()
+			})
+			.done(function (response) {
+				$("#tableContiner").html(response);
+				$("#actionContainer").html("");
+				focusAction("tableContiner");
+			})
+			.fail(function (XMLHttpRequest, textStatus, errorThrown) {
+				alert("FAIL");
+			});
+		}
+		else {
+			swal({
+				title: "Warning",
+				text: "Please enter all valid data in fields.",
+				icon: "warning",
+				buttons: true,
+				dangerMode: true,
+			});
+		}
+	});
+	$("#cancelBtn").click(function () {
+		$("#actionContainer").html("");
+		focusAction("tableContiner");
+	});
+</script>
+
+

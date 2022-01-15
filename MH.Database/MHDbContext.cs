@@ -24,5 +24,12 @@ namespace MH.Database
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItem { get; set; }
 
+
+
+        public DbSet<Country> Countries { get; set; }
+        public DbSet<Division> Divisions { get; set; }
+        public DbSet<District> Districts { get; set; }
+        public DbSet<Upazila> Upazilas { get; set; }
+        
     }
 }
