@@ -24,19 +24,22 @@ namespace MH.Web.Controllers
             UpazilaSearchViewModel model = new UpazilaSearchViewModel();
             model.SearchTerm = search;
             pageNo = pageNo.HasValue ? pageNo.Value > 0 ? pageNo.Value : 1 : 1;
-
-            var countUpazila = AddressService.Instance.GetUpazilasCount(search);
-            model.Upazilas = AddressService.Instance.GetUpazilas(search, pageNo.Value, pageSize);
-            if (model.Upazilas != null)
+            try
             {
-                model.Pager = new Pager(countUpazila, pageNo, pageSize);
+                var countUpazila = AddressService.Instance.GetUpazilasCount(search);
+                model.Upazilas = AddressService.Instance.GetUpazilas(search, pageNo.Value, pageSize);
+                if (model.Upazilas != null)
+                {
+                    model.Pager = new Pager(countUpazila, pageNo, pageSize);
+                    //return PartialView(model);
+                    //return PartialView("_CategoryTable", model);
+                }
+            }
+            catch (Exception )
+            {
                 return PartialView(model);
-                //return PartialView("_CategoryTable", model);
             }
-            else
-            {
-                return HttpNotFound();
-            }
+            return PartialView(model);
         }
 
         public ActionResult Create()

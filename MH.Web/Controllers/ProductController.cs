@@ -24,11 +24,19 @@ namespace MH.Web.Controllers
             ProductSearchViewModel model = new ProductSearchViewModel();
             model.SearchTerm = search;
             pageNo = pageNo.HasValue ? pageNo.Value > 0 ? pageNo.Value : 1 : 1;
-
-            var countProduct = ProductsService.Instance.GetProductsCount(search);
-            model.Products = ProductsService.Instance.GetProducts(search, pageNo.Value, pageSize);
-
-            model.Pager = new Pager(countProduct, pageNo, pageSize);
+            try
+            {
+                var countProduct = ProductsService.Instance.GetProductsCount(search);
+                model.Products = ProductsService.Instance.GetProducts(search, pageNo.Value, pageSize);
+                if (model.Products!=null)
+                {
+                    model.Pager = new Pager(countProduct, pageNo, pageSize);
+                }
+            }
+            catch (Exception )
+            {
+                return PartialView(model);
+            }
             return PartialView(model);
         }
 
@@ -45,7 +53,9 @@ namespace MH.Web.Controllers
         [HttpPost]
         public ActionResult Create(NewProductViewModel model)
         {
-            var newProduct = new Product();
+            var newProduct = new Product(); //{
+            //    BrandName = model.BrandName;
+            //};
             newProduct.BrandName = model.BrandName;
             newProduct.Strength = model.Strength;
             newProduct.GenericName = model.GenericName;

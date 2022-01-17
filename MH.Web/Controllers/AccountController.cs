@@ -9,6 +9,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using MH.Web.Models;
+using MH.Entities;
+using MH.Services;
 
 namespace MH.Web.Controllers
 {

@@ -1,4 +1,5 @@
 ﻿using MH.Entities;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -8,13 +9,16 @@ using System.Threading.Tasks;
 
 namespace MH.Database
 {
-    public class MHDbContext : DbContext
+    public class MHDbContext : IdentityDbContext<ApplicationUser>  //DbContext
     {
-        public MHDbContext() : base("MHConnection")
+        public MHDbContext() : base("name=MHConnection")
         {
 
         }
-
+        public static MHDbContext Create()
+        {
+            return new MHDbContext();
+        }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Company> Companies { get; set; }

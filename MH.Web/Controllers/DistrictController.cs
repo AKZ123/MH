@@ -24,19 +24,22 @@ namespace MH.Web.Controllers
             DistrictSearchViewModel model = new DistrictSearchViewModel();
             model.SearchTerm = search;
             pageNo = pageNo.HasValue ? pageNo.Value > 0 ? pageNo.Value : 1 : 1;
-
-            var countDistrict = AddressService.Instance.GetDistrictsCount(search);
-            model.Districts= AddressService.Instance.GetDistricts(search, pageNo.Value, pageSize);
-            if (model.Districts != null)
+            try
             {
-                model.Pager = new Pager(countDistrict, pageNo, pageSize);
+                var countDistrict = AddressService.Instance.GetDistrictsCount(search);
+                model.Districts = AddressService.Instance.GetDistricts(search, pageNo.Value, pageSize);
+                if (model.Districts != null)
+                {
+                    model.Pager = new Pager(countDistrict, pageNo, pageSize);
+                    //return PartialView(model);
+                    //return PartialView("_CategoryTable", model);
+                }
+            }
+            catch (Exception)
+            {
                 return PartialView(model);
-                //return PartialView("_CategoryTable", model);
             }
-            else
-            {
-                return HttpNotFound();
-            }
+            return PartialView(model);
         }
 
         public ActionResult Create()

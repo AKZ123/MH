@@ -22,22 +22,24 @@ namespace MH.Web.Controllers
             model.SearchTerm = search;
 
             pageNo = pageNo.HasValue ? pageNo.Value > 0 ? pageNo.Value : 1 : 1;
-
-            var totalRecords = AddressService.Instance.GetCountriesCount(search);
-            model.Countries= AddressService.Instance.GetCountries(search, pageNo.Value);
-
-            if (model.Countries!= null)
+            try
             {
-                model.Pager = new Pager(totalRecords, pageNo, 3);
+                var totalRecords = AddressService.Instance.GetCountriesCount(search);
+                model.Countries = AddressService.Instance.GetCountries(search, pageNo.Value);
 
-                //return PartialView("_CategoryTable", model);
+                if (model.Countries != null)
+                {
+                    model.Pager = new Pager(totalRecords, pageNo, 3);
+
+                    //return PartialView("_CategoryTable", model);
+                    //return PartialView(model);
+                }
+            }
+            catch (Exception )
+            {
                 return PartialView(model);
-
             }
-            else
-            {
-                return HttpNotFound();
-            }
+            return PartialView(model);
         }
 
         public ActionResult Create()

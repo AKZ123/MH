@@ -24,20 +24,22 @@ namespace MH.Web.Controllers
             DivisionSearchViewModel model = new DivisionSearchViewModel();
             model.SearchTerm = search;
             pageNo = pageNo.HasValue ? pageNo.Value > 0 ? pageNo.Value : 1 : 1;
-
-            var totalRecords = AddressService.Instance.GetDivisionsCount(search);
-            model.Divisions= AddressService.Instance.GetDivisions(search, pageNo.Value, pageSize);
-            if (model.Divisions != null)
+            try
             {
-                model.Pager = new Pager(totalRecords, pageNo, 3);
+                var totalRecords = AddressService.Instance.GetDivisionsCount(search);
+                model.Divisions = AddressService.Instance.GetDivisions(search, pageNo.Value, pageSize);
+                if (model.Divisions != null)
+                {
+                    model.Pager = new Pager(totalRecords, pageNo, 3);
 
-                //return PartialView("_CategoryTable", model);
+                    //return PartialView("_CategoryTable", model);
+                }
+            }
+            catch (Exception ex)
+            {
                 return PartialView(model);
             }
-            else
-            {
-                return HttpNotFound();
-            }
+            return PartialView(model);
         }
 
         public ActionResult Create()

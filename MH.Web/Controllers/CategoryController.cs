@@ -18,26 +18,29 @@ namespace MH.Web.Controllers
         }
         public ActionResult CategoryTable(string search, int? pageNo)
         {
+            int pageSize = 10;
             CategorySearchViewModel model = new CategorySearchViewModel();
             model.SearchTerm = search;
 
             pageNo = pageNo.HasValue ? pageNo.Value > 0 ? pageNo.Value : 1 : 1;
-
-            var totalRecords = CategoriesService.Instance.GetCategoriesCount(search);
-            model.Categories = CategoriesService.Instance.GetCategories(search, pageNo.Value);
-
-            if (model.Categories != null)
+            try
             {
-                model.Pager = new Pager(totalRecords, pageNo, 3);
-
-                //return PartialView("_CategoryTable", model);
+                var totalRecords = CategoriesService.Instance.GetCategoriesCount(search);
+                model.Categories = CategoriesService.Instance.GetCategories(search, pageNo.Value);
+                if (model.Categories != null)
+                {
+                    model.Pager = new Pager(totalRecords, pageNo, pageSize);
+                    //return PartialView("_CategoryTable", model);
+                }
+            }
+            catch (Exception)
+            {
+                //return PartialView("Error", new HandleErrorInfo(ex, "ControllerName", "actionName"));
                 return PartialView(model);
+                //throw;
+            }
 
-            }
-            else
-            {
-                return HttpNotFound();
-            }
+            return PartialView(model);
         }
 
         // GET: Category/Details/5
