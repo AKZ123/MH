@@ -91,6 +91,18 @@
     <Compile Include="Migrations\202201191830444_UserSaleArea.designer.cs">
       <DependentUpon>202201191830444_UserSaleArea.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202201192144299_UserAddressAdd.cs" />
+    <Compile Include="Migrations\202201192144299_UserAddressAdd.designer.cs">
+      <DependentUpon>202201192144299_UserAddressAdd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202201192300189_UsersStores.cs" />
+    <Compile Include="Migrations\202201192300189_UsersStores.designer.cs">
+      <DependentUpon>202201192300189_UsersStores.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202201192313066_UsersStoresUpdate.cs" />
+    <Compile Include="Migrations\202201192313066_UsersStoresUpdate.designer.cs">
+      <DependentUpon>202201192313066_UsersStoresUpdate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -113,6 +125,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202201191830444_UserSaleArea.resx">
       <DependentUpon>202201191830444_UserSaleArea.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202201192144299_UserAddressAdd.resx">
+      <DependentUpon>202201192144299_UserAddressAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202201192300189_UsersStores.resx">
+      <DependentUpon>202201192300189_UsersStores.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202201192313066_UsersStoresUpdate.resx">
+      <DependentUpon>202201192313066_UsersStoresUpdate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

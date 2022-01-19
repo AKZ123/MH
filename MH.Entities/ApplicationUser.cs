@@ -27,6 +27,9 @@ namespace MH.Entities
 
         public virtual IList<ProductBatchUser> ProductBatchUsers { get; set; }
         public virtual IList<UserSaleArea> UserSaleAreas { get; set; }
+        public virtual IList<UAddress> UserAddresses { get; set; }
+        public virtual List<UserStore> UserStores { get; set; }
+
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType

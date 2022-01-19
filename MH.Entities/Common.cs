@@ -22,7 +22,37 @@ namespace MH.Entities
         Unactive = 0,
         Active = 1
     }
-    class Common
+    public enum AddressType : short
     {
+        Permanent = 0,    
+        Present = 1
     }
+    public enum Flore : short
+    {
+        Upon_10 = 10,
+        Upon_9 = 9,
+        Upon_8 = 8,
+        Upon_7 = 7,
+        Upon_6 = 6,
+        Upon_5 = 5,
+        Upon_4 = 4,
+        Upon_3 = 3,
+        Upon_2 = 2,
+        Upon_1 = 1,
+        Ground = 0,
+        Ground_1 = -1,
+        Ground_2 = -2,
+        Ground_3 = -3,
+        Ground_4 = -4,
+        Ground_5 = -5
+    }
+    public enum UserStatus : short
+    {
+        Owner = 0,
+        Manager = 1,
+        Employee = 2
+    }
+    //class Common
+    //{
+    //}
 }

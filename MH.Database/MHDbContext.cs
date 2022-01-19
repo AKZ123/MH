@@ -30,6 +30,9 @@ namespace MH.Database
         public DbSet<OrderItem> OrderItem { get; set; }//Bridge to Batch
         public DbSet<SaleArea> SaleAreas { get; set; }//-
         public DbSet<UserSaleArea> UserSaleArea { get; set; }//
+        public DbSet<UAddress> UAddress { get; set; }
+        public DbSet<Store> Stores { get; set; }
+        public DbSet<UserStore> UserStore { get; set; }
 
 
 

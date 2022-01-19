@@ -10,7 +10,6 @@ namespace MH.Entities
 {
     public class OrderItem
     {
-        //public int ID { get; set; }
         [Key, Column(Order = 1)]
         public int BatchId { get; set; }
         [ForeignKey("BatchId")]
