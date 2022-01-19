@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace MH.Entities
 {
-    public class ProductBatchUser
+    public class UserSaleArea
     {
-        [Key,Column(Order =1)]
-        public int BatchId { get; set; }
-        [ForeignKey("BatchId")]
-        public virtual Batch Batch { get; set; }
+        [Key, Column(Order = 1)]
+        public int SaleAreaId { get; set; }
+        [ForeignKey("SaleAreaId")]
+        public virtual SaleArea SaleAreas { get; set; }
 
 
         [Key, Column(Order = 2)]
@@ -21,10 +21,8 @@ namespace MH.Entities
         [ForeignKey("UserID")]
         public virtual ApplicationUser Users { get; set; }
 
-
-        public string Stocks { get; set; }
-        public DateTime EnrollDate { get; set; }
-        public ProductStatus ProductStatus { get; set; }
-        public decimal Percentage { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime ExpireDate { get; set; }
+        public AreaStatus AreaStatus { get; set; }
     }
 }
