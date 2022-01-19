@@ -83,6 +83,10 @@
     <Compile Include="Migrations\202201172048203_more.designer.cs">
       <DependentUpon>202201172048203_more.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202201182206205_UserAndBatch.cs" />
+    <Compile Include="Migrations\202201182206205_UserAndBatch.designer.cs">
+      <DependentUpon>202201182206205_UserAndBatch.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -99,6 +103,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202201172048203_more.resx">
       <DependentUpon>202201172048203_more.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202201182206205_UserAndBatch.resx">
+      <DependentUpon>202201182206205_UserAndBatch.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

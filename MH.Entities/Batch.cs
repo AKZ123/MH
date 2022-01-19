@@ -22,6 +22,7 @@ namespace MH.Entities
         public virtual Product Product { get; set; }
 
         public virtual IList<OrderItem> OrderItems { get; set; }
+        public virtual IList<ProductBatchUser> ProductBatchUsers { get; set; }
 
     }
 }

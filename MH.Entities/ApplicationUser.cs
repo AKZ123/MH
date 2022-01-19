@@ -9,9 +9,30 @@ using System.Threading.Tasks;
 
 namespace MH.Entities
 {
+    public enum Genders : short
+    {
+        Male = 1,
+        Female = 2,
+        Unknown = 3
+    }
+
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit https://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
     {
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string PrifilePic { get; set; }
+        public long NID { get; set; }
+        public string NIDPic { get; set; }
+        public DateTime BirthDate { get; set; }
+        public Genders Gender { get; set; }
+        public string FatherName { get; set; }
+        public string MotherName { get; set; }
+        public double UserCode { get; set; } 
+        public double ReferenceCode { get; set; }
+
+        public virtual IList<ProductBatchUser> ProductBatchUsers { get; set; }
+
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
