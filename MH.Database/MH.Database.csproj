@@ -103,6 +103,10 @@
     <Compile Include="Migrations\202201192313066_UsersStoresUpdate.designer.cs">
       <DependentUpon>202201192313066_UsersStoresUpdate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202201251905069_role.cs" />
+    <Compile Include="Migrations\202201251905069_role.designer.cs">
+      <DependentUpon>202201251905069_role.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -134,6 +138,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202201192313066_UsersStoresUpdate.resx">
       <DependentUpon>202201192313066_UsersStoresUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202201251905069_role.resx">
+      <DependentUpon>202201251905069_role.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

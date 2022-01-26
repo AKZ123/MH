@@ -179,6 +179,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\SharedController.cs" />
     <Compile Include="Controllers\ShopController.cs" />
     <Compile Include="Controllers\UpazilaController.cs" />
@@ -194,6 +195,7 @@
     <Compile Include="ViewModels\AddressViewModels.cs" />
     <Compile Include="ViewModels\HomeViewModels.cs" />
     <Compile Include="ViewModels\ProductViewModel.cs" />
+    <Compile Include="ViewModels\RoleViewModel.cs" />
     <Compile Include="ViewModels\SharedViewModels.cs" />
     <Compile Include="ViewModels\ShopViewModel.cs" />
   </ItemGroup>
@@ -306,6 +308,10 @@
     <Content Include="Views\Upazila\UpazilaTable.cshtml" />
     <Content Include="Views\Upazila\Create.cshtml" />
     <Content Include="Views\Upazila\Edit.cshtml" />
+    <Content Include="Views\Role\Index.cshtml" />
+    <Content Include="Views\Role\RoleTable.cshtml" />
+    <Content Include="Views\Role\Create.cshtml" />
+    <Content Include="Views\Role\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

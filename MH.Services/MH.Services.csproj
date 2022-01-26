@@ -79,6 +79,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddressService.cs" />
+    <Compile Include="ApplicationRoleManager.cs" />
     <Compile Include="ApplicationSignInManager.cs" />
     <Compile Include="ApplicationUserManager.cs" />
     <Compile Include="CompaniesService.cs" />

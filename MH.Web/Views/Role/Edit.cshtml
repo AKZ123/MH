@@ -1,0 +1,46 @@
+﻿@model MH.Web.ViewModels.RoleViewModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+<h2>Edit Category</h2>
+<form id="editRole">
+    <input type="hidden" name="Id" value="@Model.Id" />
+    <div class="row">
+        <div class="col-md-8">
+            <div class="form-group">
+                <label>Name</label>
+                <input class="form-control" name="Name" value="@Model.Name" />
+            </div>
+            
+        </div>
+        <div class="col-md-4">
+            <div class="thumb">
+                @*<img src="@imageURL" class="img-thumbnail img-fluid" id="categoryImage" />*@
+            </div>
+        </div>
+    </div>
+    <button id="updateBtn" type="button" class="btn btn-primary">Update</button>
+    <button id="cancelBtn" type="button" class="btn btn-primary">Cancel</button>
+</form>
+<script>
+    $("#updateBtn").click(function () {
+		$.ajax({
+			type: 'POST',
+			url: '@Url.Action("Edit", "Role")',
+            data: $("#editRole").serialize()
+		})
+        .done(function (response) {
+            $("#tableContainer").html(response);
+            $("#actionContainer").html("");
+            focusAction("tableContainer");
+        })
+        .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+        	alert("FAIL");
+        });
+	});
+    $("#cancelBtn").click(function () {
+	    $("#actionContainer").html("");
+		focusAction("tableContainer");
+	});
+</script>

@@ -1,0 +1,84 @@
+﻿
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create Role</h2>
+<form id="createRole">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="form-group">
+                <label>Name <span class="text-danger">*</span></label>
+                <input class="form-control" name="Name" />
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="thumb">
+                @*<img class="img-thumbnail img-fluid" id="categoryImage" src="@imageURL" />*@
+            </div>
+        </div>
+    </div>
+    <button id="saveBtn" type="button" class="btn btn-primary">Save</button>
+    <button id="cancelBtn" type="button" class="btn btn-primary">Cancel</button>
+</form>
+
+<script>
+
+        $("#saveBtn").click(function () {
+        //debugger;
+            if ($("#createRole").valid()) {
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("Create", "Role")',
+                data: $("#createRole").serialize()
+            })
+			.done(function (response) {
+			    $("#tableContainer").html(response);
+			    $("#actionContainer").html("");
+			    focusAction("tableContainer");
+			})
+			.fail(function (XMLHttpRequest, textStatus, errorThrown) {
+			    swal({
+			        title: "Warning",
+			        text: "Please enter all required fields.",
+			        icon: "warning",
+			        buttons: true,
+			        dangerMode: true,
+			    });
+			});
+        }
+        else {
+            swal({
+                title: "Warning",
+                text: "Please enter all valid data in fields.",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            });
+        }
+    });
+    //form data validation.
+    $('#createRole').validate({
+        rules: {
+            Name: {
+                required: true,
+                minlength: 1,
+                maxlength: 50,
+            }
+        },
+        messages: {
+            Name: {
+                required: 'Name is required',
+                minlength: 'Minimum Length is 1',
+                maxlength: 'Maximum Length is 50'
+            }
+        }
+    });
+ 
+    //Cancel sabeing category
+    $("#cancelBtn").click(function () {
+        $("#actionContainer").html("");
+        focusAction("tableContainer");
+    });
+</script>
+
