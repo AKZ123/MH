@@ -83,6 +83,7 @@
     <Compile Include="ApplicationSignInManager.cs" />
     <Compile Include="ApplicationUserManager.cs" />
     <Compile Include="CompaniesService.cs" />
+    <Compile Include="DashboardService.cs" />
     <Compile Include="MessageService.cs" />
     <Compile Include="ProductsService.cs" />
     <Compile Include="CategoriesService.cs" />

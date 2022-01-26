@@ -1,0 +1,47 @@
+﻿@model MH.Web.ViewModels.DashboardViewModel
+@{
+    ViewBag.Title = "Index";
+    //Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<div class="jumbotron">
+    <h1 class="display-4">Hello @User.Identity.Name</h1>
+    <p class="lead">This is Dashbord of TATINI.</p>
+    <hr class="my-4" />
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="card text-center">
+            <h1 class="card-title display-2 align-middle">
+                @Model.UserCount
+            </h1>
+            <div class="card-footer display-4">
+                <a href="@Url.Action("Users","Dashboard")">Users</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-center">
+            <h1 class="card-title display-2 align-middle">
+                @Model.RoleCount
+            </h1>
+            <div class="card-footer display-4">
+                <a href="@Url.Action("Index","Role")">Roles</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-center">
+            <h1 class="card-title display-2 align-middle">
+                @Model.ProductCount
+            </h1>
+            <div class="card-footer display-4">
+                <a href="@Url.Action("Index","Product")">Products</a>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
