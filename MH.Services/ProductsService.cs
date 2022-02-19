@@ -25,6 +25,7 @@ namespace MH.Services
         {
 
         }
+        #endregion
 
         public int SearchProductsCount(string searchTerm, int? minimumPrice, int? maximumPrice, int? categoryID, int? sortBy)
         {
@@ -80,7 +81,6 @@ namespace MH.Services
                 }
             }
         }
-        #endregion
         public void SaveProduct(Product product)
         {
             //  use   ( Reposetory)
@@ -92,7 +92,6 @@ namespace MH.Services
                 context.SaveChanges();
             }
         }
-
         public List<Product> GetAllProducts()
         {
             using (var context = new MHDbContext())
@@ -109,7 +108,6 @@ namespace MH.Services
                 //return context.Products.Find(ID);
             }
         }
-       
         public List<Product> GetProducts(string search, int pageNo, int pageSize)
         {
             //int pageSize = 5;
@@ -145,7 +143,6 @@ namespace MH.Services
                 context.SaveChanges();
             }
         }
-
         public void DeleteProduct(int ID)
         {
             using (var context = new MHDbContext())
@@ -159,7 +156,6 @@ namespace MH.Services
                 context.SaveChanges();
             }
         }
-
         public List<Product> GetProducts(List<int> IDs)
         {
             using (var context = new MHDbContext())

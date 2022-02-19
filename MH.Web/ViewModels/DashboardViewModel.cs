@@ -12,23 +12,23 @@ namespace MH.Web.ViewModels
         public int ProductCount { get; set; }
     }
 
-    //public class UserViewModel
-    //{
-    //    public string RoleID { get; set; }
-    //    public string SearchTerm { get; set; }
-    //    public List<IdentityRole> Roles { get; set; }
-    //    public int? PageNo { get; set; }
-    //}
+    ////public class UserViewModel
+    ////{
+    ////    public string RoleID { get; set; }
+    ////    public string SearchTerm { get; set; }
+    ////    public List<IdentityRole> Roles { get; set; }
+    ////    public int? PageNo { get; set; }
+    ////}
 
-    //public class UsersListingViewModel
-    //{
-    //    public List<DealDoubleUser> Users { get; set; }
-    //    public string RoleID { get; set; }
-    //    public Pager Pager { get; set; }
-    //    public string SearchTerm { get; set; }
+    ////public class UsersListingViewModel
+    ////{
+    ////    public List<DealDoubleUser> Users { get; set; }
+    ////    public string RoleID { get; set; }
+    ////    public Pager Pager { get; set; }
+    ////    public string SearchTerm { get; set; }
 
-    //    public int? PageNo { get; set; }
-    //}
+    ////    public int? PageNo { get; set; }
+    ////}
 
 
     //public class RolesViewModel
@@ -47,10 +47,10 @@ namespace MH.Web.ViewModels
     //}
 
 
-    //public class UsersDetailViewModel : PageViewModel
-    //{
-    //    public DealDoubleUser Users { get; set; }
-    //}
+    ////public class UsersDetailViewModel : PageViewModel
+    ////{
+    ////    public DealDoubleUser Users { get; set; }
+    ////}
 
 
     //public class UserRolesViewModel

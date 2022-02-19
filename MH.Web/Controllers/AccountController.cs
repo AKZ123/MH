@@ -11,6 +11,7 @@ using Microsoft.Owin.Security;
 using MH.Web.Models;
 using MH.Entities;
 using MH.Services;
+using System.Collections.Generic;
 
 namespace MH.Web.Controllers
 {
@@ -88,7 +89,7 @@ namespace MH.Web.Controllers
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            var result = await SignInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -161,10 +162,11 @@ namespace MH.Web.Controllers
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
-        {
+        {       //string fiveDigitKey = Guid.NewGuid().ToString().Substring(0, 5); //model.UserCode = System.Web.Security.Membership.GeneratePassword(5, 0);   //string x = DateTime.Now.Ticks.ToString("X");      
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                //var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { FirstName = model.FirstName, LastName = model.LastName, Nickname = model.Nickname, PhoneNumber = model.PhoneNumber, BirthDate = model.BirthDate, Gender = model.Gender, UserName = model.UserName, AdmitDate = DateTime.Now};
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

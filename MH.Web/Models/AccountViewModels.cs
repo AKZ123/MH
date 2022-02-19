@@ -1,5 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using MH.Entities;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MH.Web.Models
 {
@@ -49,10 +52,12 @@ namespace MH.Web.Models
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Email")]
-        [EmailAddress]
-        public string Email { get; set; }
-
+        [Display(Name = "User Name")]
+        public string UserName { get; set; }
+        //[Required]
+        //[Display(Name = "Email")]
+        //[EmailAddress]
+        //public string Email { get; set; }
         [Required]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
@@ -65,9 +70,41 @@ namespace MH.Web.Models
     public class RegisterViewModel
     {
         [Required]
-        [EmailAddress]
-        [Display(Name = "Email")]
-        public string Email { get; set; }
+        [Phone]
+        [Display(Name = "Phone Number")]
+        public string PhoneNumber { get; set; }
+        [Required]
+        [Display(Name = "User Name")]
+        public string UserName { get; set; }
+        [Required]
+        public string FirstName { get; set; }
+        [Required]
+        public string LastName { get; set; }
+        [Required]
+        [Display(Name = "Nick Name")]
+        public string Nickname { get; set; }
+        //public string ProfilePic { get; set; }
+        //public long? NID { get; set; }
+        //public string NIDPic { get; set; }
+        [Required]
+        [Display(Name = "Date of Birth")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime? BirthDate { get; set; }
+        [Required]
+        public Genders? Gender { get; set; }
+        //public string FatherName { get; set; }
+        //public string MotherName { get; set; }
+
+        //public string ReferenceUser { get; set; }
+        [DataType(DataType.Date)]
+        //[DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
+        public DateTime? AdmitDate { get; set; }
+        //..........................................................//
+        //[Required]
+        //[EmailAddress]
+        //[Display(Name = "Email")]
+        //public string Email { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]

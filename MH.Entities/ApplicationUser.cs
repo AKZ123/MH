@@ -14,16 +14,16 @@ namespace MH.Entities
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public string Nickname { get; set; }
         public string ProfilePic { get; set; }
-        public long NID { get; set; }
+        public long? NID { get; set; }
         public string NIDPic { get; set; }
-        public DateTime BirthDate { get; set; }
-        public Genders Gender { get; set; }
+        public DateTime? BirthDate { get; set; }
+        public Genders? Gender { get; set; }
         public string FatherName { get; set; }
-        public string MotherName { get; set; }
-        public double UserCode { get; set; } 
-        public double ReferenceCode { get; set; }
-        public DateTime AdmitDate { get; set; } 
+        public string MotherName { get; set; } 
+        public string ReferenceUser { get; set; }
+        public DateTime? AdmitDate { get; set; } 
 
         public virtual IList<ProductBatchUser> ProductBatchUsers { get; set; }
         public virtual IList<UserSaleArea> UserSaleAreas { get; set; }

@@ -107,6 +107,18 @@
     <Compile Include="Migrations\202201251905069_role.designer.cs">
       <DependentUpon>202201251905069_role.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202202162007023_UserChang.cs" />
+    <Compile Include="Migrations\202202162007023_UserChang.designer.cs">
+      <DependentUpon>202202162007023_UserChang.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202202191445524_userType.cs" />
+    <Compile Include="Migrations\202202191445524_userType.designer.cs">
+      <DependentUpon>202202191445524_userType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202202191931203_userProN.cs" />
+    <Compile Include="Migrations\202202191931203_userProN.designer.cs">
+      <DependentUpon>202202191931203_userProN.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -141,6 +153,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202201251905069_role.resx">
       <DependentUpon>202201251905069_role.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202202162007023_UserChang.resx">
+      <DependentUpon>202202162007023_UserChang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202202191445524_userType.resx">
+      <DependentUpon>202202191445524_userType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202202191931203_userProN.resx">
+      <DependentUpon>202202191931203_userProN.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
