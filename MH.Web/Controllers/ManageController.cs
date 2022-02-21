@@ -60,14 +60,17 @@ namespace MH.Web.Controllers
                 : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
                 : message == ManageMessageId.SetTwoFactorSuccess ? "Your two-factor authentication provider has been set."
                 : message == ManageMessageId.Error ? "An error has occurred."
+                : message == ManageMessageId.AddEmailSuccess ? "Your Email was added." //by Kader
                 : message == ManageMessageId.AddPhoneSuccess ? "Your phone number was added."
                 : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
+                : message == ManageMessageId.RemoveEmailSuccess ? "Email Address was removed!!! Add your email." //by kader
                 : "";
 
             var userId = User.Identity.GetUserId();
             var model = new IndexViewModel
             {
                 HasPassword = HasPassword(),
+                Email = await UserManager.GetEmailAsync(userId),  //by Kader
                 PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
                 TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
                 Logins = await UserManager.GetLoginsAsync(userId),
@@ -129,6 +132,55 @@ namespace MH.Web.Controllers
                 await UserManager.SmsService.SendAsync(message);
             }
             return RedirectToAction("VerifyPhoneNumber", new { PhoneNumber = model.Number });
+        }
+
+        //by Kader
+        // GET: /Manage/AddEmail
+        public ActionResult AddEmail()
+        {
+            return View();
+        }
+        //by Kader
+        // POST: /Manage/AddEmail
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> AddEmail(AddEmailViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            var result = await UserManager.SetEmailAsync(User.Identity.GetUserId(), model.Email);            
+            if (result.Succeeded)
+            {
+                var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+                if (user != null)
+                {
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                }
+                return RedirectToAction("Index", new { Message = ManageMessageId.AddEmailSuccess });
+            }
+            // If we got this far, something failed, redisplay form
+            ModelState.AddModelError("", "Failed to add Email Address");
+            return View(model);
+        }
+        //by Kader
+        // POST: /Manage/RemoveEmail
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> RemoveEmail()
+        {
+            var result = await UserManager.SetEmailAsync(User.Identity.GetUserId(), null);
+            if (!result.Succeeded)
+            {
+                return RedirectToAction("Index", new { Message = ManageMessageId.Error });
+            }
+            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            if (user != null)
+            {
+                await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+            }
+            return RedirectToAction("Index", new { Message = ManageMessageId.RemoveEmailSuccess });
         }
 
         //
@@ -373,15 +425,27 @@ namespace MH.Web.Controllers
             }
             return false;
         }
+        //by Kader
+        private bool HasEmail()
+        {
+            var user = UserManager.FindById(User.Identity.GetUserId());
+            if (user != null)
+            {
+                return user.Email != null;
+            }
+            return false;
+        }
 
         public enum ManageMessageId
         {
+            AddEmailSuccess,
             AddPhoneSuccess,
             ChangePasswordSuccess,
             SetTwoFactorSuccess,
             SetPasswordSuccess,
             RemoveLoginSuccess,
             RemovePhoneSuccess,
+            RemoveEmailSuccess,
             Error
         }
 

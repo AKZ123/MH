@@ -320,6 +320,7 @@
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\User\Users.cshtml" />
     <Content Include="Views\User\UserTable.cshtml" />
+    <Content Include="Views\Manage\AddEmail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -12,6 +12,8 @@ namespace MH.Web.Models
         public string PhoneNumber { get; set; }
         public bool TwoFactor { get; set; }
         public bool BrowserRemembered { get; set; }
+        //by Kader
+        public string Email { get; set; }
     }
 
     public class ManageLoginsViewModel
@@ -65,7 +67,13 @@ namespace MH.Web.Models
         [Display(Name = "Phone Number")]
         public string Number { get; set; }
     }
-
+    public class AddEmailViewModel
+    {
+        [Required]
+        [EmailAddress]
+        [Display(Name = "Email")]
+        public string Email { get; set; }
+    }
     public class VerifyPhoneNumberViewModel
     {
         [Required]
