@@ -113,7 +113,7 @@ namespace MH.Web.Controllers
             //model.Users = UserManager.Users.ToList();
 
             var users = UserManager.Users;  //.AsQueryable();
-           
+
             if (!string.IsNullOrEmpty(roleID))
             {
                 //users = users.Where(x => x.Roles.Where(y => y.RoleId == roleID).Count()>0);
@@ -128,8 +128,8 @@ namespace MH.Web.Controllers
             {
                 users = users.Where(x => x.PhoneNumber.ToLower().Contains(phoneNo.ToLower()));
             }
-
-            pageNo = pageNo ?? 1;
+            pageNo = pageNo.HasValue ? pageNo.Value > 0 ? pageNo.Value : 1 : 1;
+            //pageNo = pageNo ?? 1;
             //pageNo = pageNo.HasValue ? pageNo.Value : 1;
 
             var skipCount = (pageNo.Value - 1) * pageSize;

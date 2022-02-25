@@ -3,11 +3,18 @@
 <table class="table table-hover">
     <thead>
         <tr>
-            <th>Name</th>
-            <th>UserName</th>
+            <th>User Name</th>
+            <th>Nick Name</th>
+            <th>Role</th>
+            <th>Phone Number </th>
+            @*<th>First Name</th>
+        <th>Last Name</th>*@
+            <th>Full Name</th>
             <th>Email </th>
             <th>Gender </th>
-            <th>Role</th>
+            <th>NID </th>
+            <th>BirthDate </th>
+            <th>AdmitDate</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -16,31 +23,55 @@
         {
             foreach (var user in Model.Users)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => user.FirstName, user.LastName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => user.UserName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => user.Email)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => user.Gender)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => user.Roles.Count)
-                    </td>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => user.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => user.Nickname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => user.Roles.Count)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => user.PhoneNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => user.FirstName, user.LastName)
+            </td>
+            <td>
+                @if (@user.Email != null)
+                {
+                    @Html.DisplayFor(modelItem => user.Email)
+                    @*<text> @user.Email.Count </text>*@
+                }
+                else
+                {
+                    <text>No Email.</text>
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => user.Gender)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => user.NID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => user.BirthDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => user.AdmitDate)
+            </td>
 
-                    <td>
-                        @*
-                            @Html.ActionLink("Details", "Details", new { id = user.Id }) |
-                            <button class="moreButton btn btn-primary" data-id="@user.Id" data-toggle="modal" data-target="#formModal">More Details</button>
-                        *@
-                        <a href="@Url.Action("userDetails","Dashboard",new { userID=user.Id})" class="moreButton btn btn-primary">More Details</a>
-                    </td>
-                </tr>
+
+            <td>
+                @*
+        @Html.ActionLink("Details", "Details", new { id = user.Id }) | *@
+                <button class="moreButton btn btn-primary" data-id="@user.Id" data-toggle="modal" data-target="#formModal">More Details</button>
+
+                <a href="@Url.Action("userDetails","User",new { userID=user.Id})" class="moreButton btn btn-primary">More Details</a>
+            </td>
+        </tr>
             }
         }
         else
@@ -66,14 +97,14 @@
             else
             {
                 <li class="page-item">
-                    <a class="page-link" href="@Url.Action("Users","Dashboard",new { pageNo=Model.Pager.CurrentPage - 1 ,roleID=Model.RoleID, searchTerm=Model.SearchTerm})">Previous</a>
+                    <a class="page-link" href="@Url.Action("Users","User",new { roleID=Model.RoleID, phoneNo=Model.PageNo, search=Model.SearchTerm, pageNo=Model.Pager.CurrentPage - 1 })">Previous</a>
                 </li>
             }
 
             @for (int page = Model.Pager.StartPage; page < Model.Pager.EndPage + 1; page++)
             {
                 var active = page == Model.Pager.CurrentPage ? "active" : string.Empty;
-                <li class="page-item @active"><a class="page-link" href="@Url.Action("Users","Dashboard",new { pageNo = page,roleID=Model.RoleID, searchTerm=Model.SearchTerm })">@page</a></li>
+                <li class="page-item @active"><a class="page-link" href="@Url.Action("Users","User",new {roleID=Model.RoleID, phoneNo=Model.PageNo, search=Model.SearchTerm, pageNo = page })">@page</a></li>
             }
 
             @if (Model.Pager.CurrentPage == Model.Pager.EndPage)
@@ -85,7 +116,7 @@
             else
             {
                 <li class="page-item">
-                    <a class="page-link" href="@Url.Action("Users","Dashboard",new { pageNo=Model.Pager.CurrentPage + 1 ,roleID=Model.RoleID, searchTerm=Model.SearchTerm})">Next</a>
+                    <a class="page-link" href="@Url.Action("Users","User",new { roleID=Model.RoleID, phoneNo=Model.PageNo, search=Model.SearchTerm, pageNo=Model.Pager.CurrentPage + 1 })">Next</a>
                 </li>
             }
         </ul>

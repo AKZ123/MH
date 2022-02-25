@@ -15,22 +15,22 @@
         <form method="post">
             @* for Hide URL set method="post" & on Action Controlar set [HttpGet] to "" *@
             <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Search" name="searchTerm" value="@Model.SearchTerm" />
-                <select class="custom-select form-control" name="RoleID">
-                    <option selected>Select Role...</option>
+                <input name="searchTerm" value="@Model.SearchTerm" type="text" class="form-control" placeholder="Search by User Name" />
+                <select class="custom-select form-control" name="roleID">
+                    <option value="@string.Empty" >Select Role...</option>
                     @foreach (var role in Model.Roles)
                     {
                         var selected = role.Id == roleID ? "selected" : string.Empty;
                         <option value="@role.Id" @selected>@role.Name</option>
                     }
                 </select>
-                <input type="text" class="form-control" placeholder="Search by PhoneNumber" name="PhoneNumber" value="@Model.PhoneNumber" />
+                <input type="text" class="form-control" placeholder="Search by PhoneNumber" name="phoneNo" value="@Model.PhoneNumber" />
                 <button type="submit" class="form-control btn btn-primary"><i class="fas fa-search"></i>Search</button>
                 <a href="@Url.Action("Users","User")" role="button" class="form-control btn btn-primary">Reset</a>
                 @*<button type="button" class="form-control btn btn-success" id="createButton"><i class="fas fa-plus"></i>Create</button>*@
             </div>
-            <input type="hidden" name="page" value="1" />
-            <input type="hidden" name="items" value="10" />
+            @*<input type="hidden" name="page" value="1" />
+            <input type="hidden" name="items" value="10" />*@
 
         </form>
     </div>
@@ -86,7 +86,7 @@
             }
             function ReloadListing() {
                 $.ajax({
-                    url: "@Url.Action("Listing", "Auctions")",
+                    url: "@Url.Action("UserTable", "User")",
                     type: "get"
                 }).done(function (response) {
                     $("#listingArea").html(response);
