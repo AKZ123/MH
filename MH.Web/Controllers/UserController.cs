@@ -141,80 +141,80 @@ namespace MH.Web.Controllers
             return PartialView(model);
         }
 
-        //public async Task<ActionResult> userDetails(string userID, bool IsPartial = false)
-        //{
-        //    UsersDetailViewModel model = new UsersDetailViewModel();
+        public async Task<ActionResult> userDetails(string userID, bool IsPartial = false)
+        {
+            UsersDetailViewModel model = new UsersDetailViewModel();
 
-        //    var user = await UserManager.FindByIdAsync(userID);
+            var user = await UserManager.FindByIdAsync(userID);
 
-        //    if (user != null)
-        //    {
-        //        model.Users = user;
-        //    }
+            if (user != null)
+            {
+                model.User = user;
+            }
 
-        //    if (IsPartial && Request.IsAjaxRequest())
-        //    {
-        //        return PartialView("_UsersDetails", model);
-        //    }
-        //    else
-        //    {
-        //        return View(model);
-        //    }
-        //}
+            if (IsPartial && Request.IsAjaxRequest())
+            {
+                return PartialView("_UsersDetails", model);
+            }
+            else
+            {
+                return View(model);
+            }
+        }
 
-        //public async Task<ActionResult> UsersRoles(string userID)
-        //{
-        //    UserRolesViewModel model = new UserRolesViewModel();
+        public async Task<ActionResult> UserRoles(string userID)
+        {
+            UserRolesViewModel model = new UserRolesViewModel();
 
-        //    model.AvailableRoles = RoleManager.Roles.ToList();
+            model.AvailableRoles = RoleManager.Roles.ToList();
 
-        //    if (!string.IsNullOrEmpty(userID))
-        //    {
-        //        model.User = await UserManager.FindByIdAsync(userID);
+            if (!string.IsNullOrEmpty(userID))
+            {
+                model.User = await UserManager.FindByIdAsync(userID);
 
-        //        if (model.User != null)
-        //        {
-        //            model.UserRoles = model.User.Roles.Select(userRole => model.AvailableRoles.FirstOrDefault(role => role.Id == userRole.RoleId)).ToList();
-        //        }
-        //    }
-        //    return PartialView("_UsersRoles", model);
-        //}
+                if (model.User != null)
+                {
+                    model.UserRoles = model.User.Roles.Select(userRole => model.AvailableRoles.FirstOrDefault(role => role.Id == userRole.RoleId)).ToList();
+                }
+            }
+            return PartialView("_UserRoles", model);
+        }
 
-        //public async Task<ActionResult> AssignUserRole(string userID, string roleID)
-        //{
-        //    if (!string.IsNullOrEmpty(userID) && !string.IsNullOrEmpty(roleID))
-        //    {
-        //        var user = await UserManager.FindByIdAsync(userID);
-        //        if (user != null)
-        //        {
-        //            var role = await RoleManager.FindByIdAsync(roleID);
-        //            if (role != null)
-        //            {
-        //                await UserManager.AddToRoleAsync(user.Id, role.Name);
-        //            }
-        //        }
-        //    }
+        public async Task<ActionResult> AssignUserRole(string userID, string roleID)
+        {
+            if (!string.IsNullOrEmpty(userID) && !string.IsNullOrEmpty(roleID))
+            {
+                var user = await UserManager.FindByIdAsync(userID);
+                if (user != null)
+                {
+                    var role = await RoleManager.FindByIdAsync(roleID);
+                    if (role != null)
+                    {
+                        await UserManager.AddToRoleAsync(user.Id, role.Name);
+                    }
+                }
+            }
 
-        //    return RedirectToAction("UsersRoles", new { userID = userID });
-        //}
+            return RedirectToAction("UserRoles", new { userID = userID });
+        }
 
-        //public async Task<ActionResult> DeleteUserRole(string userID, string roleID)
-        //{
-        //    if (!string.IsNullOrEmpty(userID) && !string.IsNullOrEmpty(roleID))
-        //    {
-        //        var user = await UserManager.FindByIdAsync(userID);
-        //        if (user != null)
-        //        {
-        //            var role = await RoleManager.FindByIdAsync(roleID);
-        //            if (role != null)
-        //            {
-        //                await UserManager.RemoveFromRoleAsync(user.Id, role.Name);
-        //            }
-        //        }
-        //    }
+        public async Task<ActionResult> DeleteUserRole(string userID, string roleID)
+        {
+            if (!string.IsNullOrEmpty(userID) && !string.IsNullOrEmpty(roleID))
+            {
+                var user = await UserManager.FindByIdAsync(userID);
+                if (user != null)
+                {
+                    var role = await RoleManager.FindByIdAsync(roleID);
+                    if (role != null)
+                    {
+                        await UserManager.RemoveFromRoleAsync(user.Id, role.Name);
+                    }
+                }
+            }
 
-        //    return RedirectToAction("UsersRoles", new { userID = userID });
-        //}
+            return RedirectToAction("UserRoles", new { userID = userID });
+        }
 
         //public async Task<ActionResult> UserComments(string userID)
         //{
@@ -240,76 +240,5 @@ namespace MH.Web.Controllers
         //    return PartialView("_UserComments", model);
         //}
 
-        // GET: User/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: User/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: User/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: User/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: User/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: User/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: User/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
     }
 }

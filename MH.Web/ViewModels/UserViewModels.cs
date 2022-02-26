@@ -28,6 +28,13 @@ namespace MH.Web.ViewModels
     }
     public class UsersDetailViewModel
     {
-        public ApplicationUser Users { get; set; }
+        public ApplicationUser User { get; set; }
+    }
+
+    public class UserRolesViewModel
+    {
+        public List<ApplicationRole> AvailableRoles { get; internal set; }
+        public ApplicationUser User { get; internal set; }
+        public IEnumerable<ApplicationRole> UserRoles { get; internal set; }
     }
 }

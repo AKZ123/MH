@@ -1,0 +1,169 @@
+﻿@model MH.Web.ViewModels.UsersDetailViewModel
+@{
+    ViewBag.Title = "userDatails";
+    //Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+    var imageURL = !string.IsNullOrEmpty(Model.User.NIDPic) ? Model.User.NIDPic : "/Content/image/system/NoImag.PNG";
+    var PrflImageURL = !string.IsNullOrEmpty(Model.User.ProfilePic) ? Model.User.ProfilePic : "/Content/image/system/profile.png";
+}
+
+@if (Model != null && Model.User != null)
+{
+<form>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Nick Name</label>
+                        <div class="col-sm-10">
+                            <input name="FullName" type="text" class="form-control" value="@Model.User.Nickname" required />
+                        </div>
+                    </div>
+                    @*<div class="form-group row">
+            <label class="col-sm-2 col-form-label">Full Name</label>
+            <div class="col-sm-10">
+                <input name="FullName" type="text" class="form-control" value="@Model.User.FirstName  @Model.User.LastName" required />
+            </div>
+        </div>*@
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">First Name</label>
+                        <div class="col-sm-10">
+                            <input name="FullName" type="text" class="form-control" value="@Model.User.FirstName" required />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Full Name</label>
+                        <div class="col-sm-10">
+                            <input name="FullName" type="text" class="form-control" value="@Model.User.LastName" required />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Phone Number</label>
+                        <div class="col-sm-10">
+                            <input name="FullName" type="text" class="form-control" value="@Model.User.PhoneNumber" required />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Email</label>
+                        <div class="col-sm-10">
+                            <input name="Email" type="text" class="form-control" value="@Model.User.Email" required readonly disabled />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Birth Date</label>
+                        <div class="col-sm-10">
+                            <input name="FullName" type="text" class="form-control" value="@Model.User.BirthDate" required />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Gender</label>
+                        <div class="col-sm-10">
+                            @Html.EnumDropDownListFor(x => x.User.Gender, "Select Gender", new { @class = "form-control" })
+                            @*<input name="FullName" type="text" class="form-control" value="@Model.User.Gender" required />*@
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Father Name</label>
+                        <div class="col-sm-10">
+                            <input name="FullName" type="text" class="form-control" value="@Model.User.FatherName" required />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Mother Name</label>
+                        <div class="col-sm-10">
+                            <input name="FullName" type="text" class="form-control" value="@Model.User.MotherName" required />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Admit Date</label>
+                        <div class="col-sm-10">
+                            <input name="FullName" type="text" class="form-control" value="@Model.User.AdmitDate" required />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Admit Date</label>
+                        <div class="col-sm-10">
+                            <input name="FullName" type="text" class="form-control" value="@Model.User.LockoutEndDateUtc" required />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Country</label>
+                        <div class="col-sm-10">
+                            @*<input name="Country" type="text" class="form-control" value="@Model.User.Country" />*@
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">City</label>
+                        <div class="col-sm-10">
+                            @*<input name="City" type="text" class="form-control" value="@Model.User.City" />*@
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Address</label>
+                        <div class="col-sm-10">
+                            @*<input name="Address" type="text" class="form-control" value="@Model.User.Address" />*@
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Email</label>
+                        <div class="col-sm-10">
+                            <input name="Email" type="text" class="form-control" value="@Model.User.Email" required readonly disabled />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">UserName</label>
+                        <div class="col-sm-10">
+                            <input name="UserName" type="text" class="form-control" value="@Model.User.UserName" required readonly disabled />
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div>
+                    <div class="thumb">
+                        <img class="img-thumbnail img-fluid" id="profileImage" src="@PrflImageURL" />
+                    </div>
+                    <div class="form-group">
+                        <label>Chang Profile Image</label>
+                        <input type="hidden" id="ProImageURL" name="ProImageURL" />
+                        <input class="form-control" id="ProimageUpload" name="Image" type="file" accept=".png, .jpg" />
+                    </div>
+                </div><hr />
+                <div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">NID</label>
+                        <div class="col-sm-9">
+                            <input name="FullName" type="text" class="form-control" value="@Model.User.NID" required />
+                        </div>
+                    </div>
+                    <div class="thumb">
+                        <img class="img-thumbnail img-fluid" id="productImage" src="@imageURL" />
+                    </div>
+                    <div class="form-group">
+                        <label>Chang NID Image</label>
+                        <input type="hidden" id="ImageURL" name="ImageURL" />
+                        <input class="form-control" id="imageUpload" name="Image" type="file" accept=".png, .jpg" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="form-group row">
+        <div class="offset-sm-2 col-sm-10">
+            <div class="btn-group float-right" role="group">
+                <button type="button" class="btn btn-success"><i class="fas fa-edit"></i> Update</button>
+            </div>
+        </div>
+    </div>
+</form>
+}
+else
+{
+    <div class="alert alert-danger" role="alert">
+        No User found.
+    </div>
+}

@@ -222,6 +222,7 @@
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\css\styles.css" />
     <Content Include="Content\image\system\NoImag.PNG" />
+    <Content Include="Content\image\system\profile.png" />
     <Content Include="Content\js\jquery-ui.js" />
     <Content Include="Content\js\jquery.cookie.js" />
     <Content Include="Content\js\jquery.min.js" />
@@ -321,6 +322,9 @@
     <Content Include="Views\User\Users.cshtml" />
     <Content Include="Views\User\UserTable.cshtml" />
     <Content Include="Views\Manage\AddEmail.cshtml" />
+    <Content Include="Views\User\userDetails.cshtml" />
+    <Content Include="Views\User\_UsersDetails.cshtml" />
+    <Content Include="Views\User\_UserRoles.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

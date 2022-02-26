@@ -66,9 +66,9 @@
 
             <td>
                 @*
-        @Html.ActionLink("Details", "Details", new { id = user.Id }) | *@
+        @Html.ActionLink("Details", "Details", new { id = user.Id }) |
                 <button class="moreButton btn btn-primary" data-id="@user.Id" data-toggle="modal" data-target="#formModal">More Details</button>
-
+                *@
                 <a href="@Url.Action("userDetails","User",new { userID=user.Id})" class="moreButton btn btn-primary">More Details</a>
             </td>
         </tr>
