@@ -129,7 +129,8 @@ namespace MH.Web.Controllers
             }
             catch
             {
-                return new HttpStatusCodeResult(500);
+                return PartialView(model);
+                //return new HttpStatusCodeResult(500);
             }
             return RedirectToAction("ProductTable");
         }

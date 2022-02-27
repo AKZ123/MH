@@ -78,29 +78,6 @@ namespace MH.Web.Controllers
 
             return View(model);
         }
-        //public ActionResult UserTable(string search, int? pageNo)
-        //{
-        //    var pageSize = 5;// ConfigurationsService.Instance.PageSize();
-
-        //    ProductSearchViewModel model = new ProductSearchViewModel();
-        //    model.SearchTerm = search;
-        //    pageNo = pageNo.HasValue ? pageNo.Value > 0 ? pageNo.Value : 1 : 1;
-        //    try
-        //    {
-        //        var countProduct = ProductsService.Instance.GetProductsCount(search);
-        //        model.Products = ProductsService.Instance.GetProducts(search, pageNo.Value, pageSize);
-        //        if (model.Products != null)
-        //        {
-        //            model.Pager = new Pager(countProduct, pageNo, pageSize);
-        //        }
-        //    }
-        //    catch (Exception)
-        //    {
-        //        return PartialView(model);
-        //    }
-        //    return PartialView(model);
-        //}
-
 
         public ActionResult UserTable(string roleID, string phoneNo, string search, int? pageNo)
         {

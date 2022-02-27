@@ -183,6 +183,7 @@
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\SharedController.cs" />
     <Compile Include="Controllers\ShopController.cs" />
+    <Compile Include="Controllers\StateController.cs" />
     <Compile Include="Controllers\UpazilaController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
@@ -201,6 +202,7 @@
     <Compile Include="ViewModels\RoleViewModel.cs" />
     <Compile Include="ViewModels\SharedViewModels.cs" />
     <Compile Include="ViewModels\ShopViewModel.cs" />
+    <Compile Include="ViewModels\StateViewModel.cs" />
     <Compile Include="ViewModels\UserViewModels.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -325,6 +327,10 @@
     <Content Include="Views\User\userDetails.cshtml" />
     <Content Include="Views\User\_UsersDetails.cshtml" />
     <Content Include="Views\User\_UserRoles.cshtml" />
+    <Content Include="Views\State\Index.cshtml" />
+    <Content Include="Views\State\StateTable.cshtml" />
+    <Content Include="Views\State\Create.cshtml" />
+    <Content Include="Views\State\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,85 @@
+﻿@model MH.Web.ViewModels.EditStateViewModel
+@{
+    ViewBag.Title = "Edit";
+}
+<h2>Edit Product</h2>
+<form id="editState">
+    <input type="hidden" name="ID" value="@Model.ID" />
+    <div class="row">
+        <div class="col-md-8">
+            <div class="form-group">
+                <label>Name</label>
+                <input class="form-control" name="Name" value="@Model.Name" />
+            </div>
+            <div class="form-group">
+                <label>Strength</label>
+                <input class="form-control" name="Unit" value="@Model.Unit" />
+            </div>
+            
+            <button id="updateBtn" type="button" class="btn btn-primary">Update</button>
+            <button id="cancelBtn" type="button" class="btn btn-primary">Cancel</button>
+        </div>
+        <div class="col-md-4">
+            <div class="thumb">
+                @*<img class="img-thumbnail img-fluid" id="productImage" src="@imageURL" />*@
+            </div>
+        </div>
+    </div>
+</form>
+<script>
+    $('#editState').validate({
+		rules: {
+			Name: {
+				required: true,
+				minlength: 3,
+				maxlength: 30,
+			},
+			Unit: {
+				maxlength: 30
+			}
+		},
+		messages: {
+			Name: {
+				required: 'Name is required',
+				minlength: 'Minimum Length is 3',
+				maxlength: 'Maximum Length is 30'
+			},
+			Unit: {
+				maxlength: 'Maximum Length is 30'
+			}
+		}
+	});
+
+	$("#updateBtn").click(function () {
+        if ($("#editState").valid()) {
+			$.ajax({
+				type: 'POST',
+				url: '@Url.Action("Edit", "State")',
+                data: $("#editState").serialize()
+			})
+			.done(function (response) {
+				$("#tableContiner").html(response);
+				$("#actionContainer").html("");
+				focusAction("tableContiner");
+			})
+			.fail(function (XMLHttpRequest, textStatus, errorThrown) {
+				alert("FAIL");
+			});
+		}
+		else {
+			swal({
+				title: "Warning",
+				text: "Please enter all valid data in fields.",
+				icon: "warning",
+				buttons: true,
+				dangerMode: true,
+			});
+		}
+	});
+	$("#cancelBtn").click(function () {
+		$("#actionContainer").html("");
+		focusAction("tableContiner");
+	});
+</script>
+
+
