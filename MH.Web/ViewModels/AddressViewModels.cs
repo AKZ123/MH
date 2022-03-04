@@ -7,6 +7,11 @@ using System.Web;
 
 namespace MH.Web.ViewModels
 {
+    public class NameViewModel
+    {
+        public int ID { get; set; }
+        public string Name { get; set; }
+    }
     #region Country
     public class CountrySearchViewModel
     {
@@ -60,10 +65,6 @@ namespace MH.Web.ViewModels
         //public int CompanyID { get; set; }
         //public List<Company> AvailableCompanies { get; set; }
     }
-    public class DivisionViewModel
-    {
-        public Division Division { get; set; }
-    }
     #endregion
     #region District
     public class DistrictSearchViewModel
@@ -87,10 +88,7 @@ namespace MH.Web.ViewModels
         public int DivisionID { get; set; }
         public List<Division> AvailableDivisions { get; set; }
     }
-    public class DistrictViewModel
-    {
-        public District District { get; set; }
-    }
+
     #endregion
     #region Upazila
     public class UpazilaSearchViewModel

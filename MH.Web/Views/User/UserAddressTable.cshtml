@@ -1,0 +1,156 @@
+﻿@model MH.Web.ViewModels.UserAddressListingViewModel
+
+@*<h4>User Address</h4>*@
+@if (Model.UAddresses != null && Model.UAddresses.Count() > 0)
+{
+    var i = 1;
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Address Type</th>
+                <th scope="col">Upazilla</th>
+                <th scope="col">VillageOrTown</th>
+                <th scope="col">RoadName</th>
+                <th scope="col">HouseName</th>
+                <th scope="col">HoldingNumber</th>
+                <th scope="col">Flat</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var address in Model.UAddresses)
+            {
+                <tr>
+                    <td scope="row">@i</td>
+                    <td>@address.Type</td>
+                    <td>@address.Upazilla</td>
+                    <td>@address.VillageOrTown</td>
+                    <td>@address.RoadName</td>
+                    <td>@address.HouseName</td>
+                    <td>@address.HoldingNumber</td>
+                    <td>@address.Flat</td>
+                    <td>
+                        <button class="editBtn" data-id="@address.AddressID">Edit</button>
+                    </td>
+                </tr>
+                i++;
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="alert alert-warning" role="alert">
+        <table class="table">
+            <tbody>
+                <tr>
+                    <td>
+                        No Address added.
+                    </td>
+                    <td>
+                        <button id="btnAddAddress" type="button" class="btn btn-success">Add Address</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+}
+
+@if (Model.UAddresses == null)
+{
+    <table class="table">
+        <tbody>
+            <tr>
+                <td>
+                    <h5>Add your Address. Present And Parmanent</h5>
+                </td>
+                <td>
+                    <button id="btnAddAddress" type="button" class="btn btn-success">Add Address</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+}
+else if (Model.UAddresses != null && Model.UAddresses.Count() == 1)
+{
+    <table class="table">
+        <tbody>
+            <tr>
+                <td>
+                    <h5>Add your another type Address. Present Or Parmanent</h5>
+                </td>
+                <td>
+                    <button class="btn btn-primary form-control" type="button" id="btnAddAddress">New</button>
+                    <button id="btnAddAddress" type="button" class="btn btn-success">Add Address</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+}
+else if (Model.UAddresses != null && Model.UAddresses.Count() == 2)
+{
+    <h5>your Present And Parmanent Address added.</h5>
+}
+
+@*<div class="card-body" id="responseInAddressHolder">  </div>*@
+
+<script>
+    $("#btnAddAddress").click(function () {
+		$.ajax({
+			url: "@Url.Action("AddUserAddress", "User", new {userID = Model.User.Id })",
+		})
+        .done(function (response) {
+        	$("#actionContainer").html(response);
+
+        	focusAction("actionContainer");
+        })
+        .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+        	alert("FAIL");
+        });
+	});
+       @*// New Create Section
+    $("#btnAddAddress").click(function () {
+        //var searchValue = $("#searchTxt").val();
+
+        $.ajax({
+            //url: '/Category/Create',
+            url: "@Url.Action("AddUserAddress", "User", new {userID = Model.User.Id })",
+        })
+            .done(function (response) {
+                $("#responseInAddressHolder").html(response);
+
+                focusAction("responseInAddressHolder");
+            })
+            .fail(function (XMLHttpRequest, textStatus, erroeThrown) {
+                alert("Fail");
+            });
+    });*@
+
+    $(".editBtn").click(function () {
+		$.ajax({
+			url: '@Url.Action("UserAddressEdit", "User")',
+			data: {
+				ID: $(this).attr('data-id')
+			}
+		})
+            .done(function (response) {
+                $("#actionContainer").html(response);
+
+                focusAction("actionContainer");
+        })
+        .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+        	alert("FAIL");
+        });
+    });
+
+
+
+
+
+
+</script>
+
+

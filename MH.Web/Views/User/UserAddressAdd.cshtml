@@ -1,0 +1,268 @@
+﻿@model MH.Web.ViewModels.UserAddressAddViewModel
+
+@if (Model != null)
+{
+    if (Model.User != null)
+    {
+        <h4>Add Address</h4>
+        <form id="userAddress">
+            <table width="100%" border="0" cellpadding="3" cellspacing="0" class="bdr-body">
+                <tbody>
+                    <tr>
+                        <td width="30%" bgcolor="#B3CBE6">Address Type<span class="black10">[*]</span></td>
+                        <td width="70%" bgcolor="#B3CBE6">
+                            @*@Html.EnumDropDownListFor(x => x.uAddress.Type, "Select Type", new { @class = "form-control" })*@
+                            @*<input name="present_care" type="text" class="field-100" id="present_care" onkeypress="return alpha(event,letters)">*@
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label>Country</label> </td>
+                        <td>
+                            <div class="form-group">
+                                <select class="form-control" name="CategoryID">
+                                    @foreach (var country in Model.AvailableCountrys)
+                                    {
+                                        <option value="@country.CountryID">@country.Name</option>
+                                    }
+                                </select>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="30%" bgcolor="#B3CBE6">Country<span class="black10">[*]</span></td>
+                        <td width="70%" bgcolor="#B3CBE6">
+                            <select id="CountrySelect" style="width:300px">
+                                <option value="-1">Select a Country</option>
+                                @foreach (var country in Model.AvailableCountrys)
+                                {
+                                    <option value="@country.CountryID">@country.Name</option>
+                                }
+                            </select>
+                            @*@if (ViewBag.CountryList != null)
+                {
+                    @Html.DropDownListFor(x => x.CounteyID, ViewBag.CountryList as SelectList, "--Select Country--", new { @class = "form-control" })
+                }*@
+                            @*@Html.DropDownListFor(x => x.Country.Name, "Select Country", new { @class = "form-control" })*@
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="30%" bgcolor="#B3CBE6">Division<span class="black10">[*]</span></td>
+                        <td width="70%" bgcolor="#B3CBE6">
+                            <select id="DivisionSelect" style="width:300px">
+                            </select>
+                            @*@Html.DropDownListFor(x => x.DivisionID, new SelectList(" "), "--Select Division--", new { @class = "form-control" })*@
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="30%" bgcolor="#B3CBE6">District<span class="black10">[*]</span></td>
+                        <td width="70%" bgcolor="#B3CBE6">
+                            <select id="DistrictSelect" style="width:300px">
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="30%" bgcolor="#B3CBE6">Upazila<span class="black10">[*]</span></td>
+                        <td width="70%" bgcolor="#B3CBE6">
+                            <select id="UpazilaSelect" style="width:300px">
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="30%" bgcolor="#B3CBE6">Country<span class="black10">[*]</span></td>
+                        <td width="70%" bgcolor="#B3CBE6">
+                            @*@Html.EnumDropDownListFor(x => x.Upazila.Name, "Select Country", new { @class = "form-control" })*@
+                        </td>
+                    </tr>
+                    <tr>
+                        <td bgcolor="#B3CBE6">
+                            Village/Town
+                        </td>
+                        <td bgcolor="#B3CBE6">
+                            @*<input name="Country" type="text" class="form-control" value="@Model.uAddress.VillageOrTown" />*@
+                        </td>
+                    </tr>
+                    <tr>
+                        <td bgcolor="#B3CBE6">
+                            Road Name
+                        </td>
+                        <td bgcolor="#B3CBE6">
+                            @*<input name="RoadName" type="text" class="form-control" value="@Model.uAddress.RoadName" />*@
+                        </td>
+                    </tr>
+                    <tr>
+                        <td bgcolor="#B3CBE6">
+                            HouseName
+                        </td>
+                        <td bgcolor="#B3CBE6">
+                            @*<input name="Country" type="text" class="form-control" value="@Model.uAddress.HouseName" />*@
+                        </td>
+                    </tr>
+                    <tr>
+                        <td bgcolor="#B3CBE6">
+                            HoldingNumber
+                        </td>
+                        <td bgcolor="#B3CBE6">
+                            @*<input name="Country" type="text" class="form-control" value="@Model.uAddress.HoldingNumber" />*@
+                        </td>
+                    </tr>
+                    <tr>
+                        <td bgcolor="#B3CBE6">
+                            Flat
+                        </td>
+                        <td bgcolor="#B3CBE6">
+                            @*<input name="Country" type="text" class="form-control" value="@Model.uAddress.Flat" />*@
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+
+
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Gender</label>
+                                <div class="col-sm-10">
+                                    @Html.EnumDropDownListFor(x => x.User.Gender, "Select Gender", new { @class = "form-control" })
+                                    @*<input name="FullName" type="text" class="form-control" value="@Model.User.Gender" required />*@
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Country</label>
+                                <div class="col-sm-10">
+                                    @*<input name="Country" type="text" class="form-control" value="@Model.User.Country" />*@
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="form-group row">
+                <div class="offset-sm-2 col-sm-10">
+                    <div class="btn-group float-right" role="group">
+                        <button id="saveBtn" type="button" class="btn btn-success"><i class="fas fa-edit"></i> Save</button>
+                        <button id="cancelBtn" type="button" class="btn btn-primary">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        }
+    else
+    {
+        <div class="alert alert-warning" role="alert">
+    No User found for adding address.
+</div>
+        
+    }
+}
+
+<script src="~/Scripts/jquery-3.6.0.min.js"></script>
+<script>
+    var CountrySelect = $('#CountrySelect');
+    var DivisionSelect = $('#DivisionSelect');
+    var DistrictSelect = $('#DistrictSelect');
+    var UpazilaSelect = $('#UpazilaSelect');
+
+    ////CountrySelect.empty();    
+    ////CountrySelect.append($('<option/>', { value: -1, text: 'Select Division' }));
+    ////CountrySelect.value('-1');
+    ////CountrySelect.prop('disabled', true);
+
+    CountrySelect.change(function () {
+        var counteyId = $('#CountrySelect option:selected').val();
+            $.ajax({
+                type: 'GET',
+                data: { countryID: counteyId },
+                url: '@Url.Action("GetDivision", "User")',
+                dataType: 'json',
+                success: function (result) {
+                    var s = '<option value="-1">--Select a Division--</option>';
+                    for (var i = 0; i < result.length; i++) {
+                        s += '<option value="' + result[i].ID + '">' + result[i].Name + '</option>';
+                    }
+                    //$('#DivisionSelect').html(s);
+                    DivisionSelect.html(s);
+                    DistrictSelect.empty();
+                    UpazilaSelect.empty();
+                }
+		    })
+
+    });
+
+    DivisionSelect.change(function () {
+        var divisionId = $('#DivisionSelect option:selected').val();
+        $.ajax({
+            type: 'GET',
+            data: { divisionID: divisionId },
+            url: '@Url.Action("GetDistrict", "User")',
+            dataType: 'json',
+            success: function (result) {
+                var s = '<option value="-1">--Select a District--</option>';
+                for (var i = 0; i < result.length; i++) {
+                    s += '<option value="' + result[i].ID + '">' + result[i].Name + '</option>';
+                }
+                //$('#DistrictSelect').html(s);
+                DistrictSelect.html(s);
+                UpazilaSelect.empty();
+            }
+		})
+    });
+
+    DistrictSelect.change(function () {
+        var upazilaId = $('#DistrictSelect option:selected').val();
+        $.ajax({
+            type: 'GET',
+            data: { upazilaID: upazilaId },
+            url: '@Url.Action("GetUpazila", "User")',
+            dataType: 'json',
+            success: function (result) {
+                var s = '<option value="-1">--Select a Upazila--</option>';
+                for (var i = 0; i < result.length; i++) {
+                    s += '<option value="' + result[i].ID + '">' + result[i].Name + '</option>';
+                }
+                $('#UpazilaSelect').html(s);
+            }
+		})
+    });
+
+    //$('#CountrySelect').on('change', function () {
+    //    alert('test');
+    //});
+
+		$("#saveBtn").click(function () {
+		//if ($("#createProduct").valid()) {
+			$.ajax({
+                type: 'POST',
+				url: '@Url.Action("AddUserAddress", "User")',
+				data: $("#createProduct").serialize()
+			})
+			.done(function (response) {
+				$("#tableContiner").html(response);
+				$("#actionContainer").html("");
+				focusAction("tableContiner");
+			})
+			.fail(function (XMLHttpRequest, textStatus, errorThrown) {
+				alert("FAIL");
+			});
+		//}
+		//else {
+		//	swal({
+		//		title: "Warning",
+		//		text: "Please enter all valid data in fields.",
+		//		icon: "warning",
+		//		buttons: true,
+		//		dangerMode: true,
+		//	});
+		//}
+	});
+	$("#cancelBtn").click(function () {
+        $("#actionContainer").html("");
+        focusAction("tableContiner");
+    });
+
+</script>

@@ -44,6 +44,14 @@ namespace MH.Services
                 return context.Countries.ToList();
             }
         }
+        public Country GetCountryByDivision(Division division)
+        {
+            using (var context = new MHDbContext())
+            {
+                return context.Countries.Where(x => x.CountryID == division.CountryId).FirstOrDefault();
+            }
+        }
+
         public Country GetCountry(int ID)
         {
             using (var context = new MHDbContext())
@@ -148,7 +156,6 @@ namespace MH.Services
                 //return context.Countries.Find(ID);
             }
         }
-
         public int GetDivisionsCount(string search)
         {
             using (var context = new MHDbContext())
@@ -169,6 +176,20 @@ namespace MH.Services
             using (var context = new MHDbContext())
             {
                 return context.Divisions.ToList();
+            }
+        }
+        public List<Division> GetDivisionsByCountryId(int CountryId)
+        {
+            using (var context = new MHDbContext())
+            {
+                return context.Divisions.Where(x=>x.CountryId == CountryId).ToList();
+            }
+        }
+        public Division GetDivisionByDistrict(District district)
+        {
+            using (var context = new MHDbContext())
+            {
+                return context.Divisions.Where(x => x.DivisionID == district.DivisionId).FirstOrDefault();
             }
         }
         public List<Division> GetDivisions(string search, int pageNo,int pageSize)
@@ -271,6 +292,20 @@ namespace MH.Services
             using (var context = new MHDbContext())
             {
                 return context.Districts.ToList();
+            }
+        }
+        public List<District> GetDistrictByDivisionsId(int DivisionId)
+        {
+            using (var context = new MHDbContext())
+            {
+                return context.Districts.Where(x => x.DivisionId == DivisionId).ToList();
+            }
+        }
+        public District GetDistrictByUpazila(Upazila upazila)
+        {
+            using (var context = new MHDbContext())
+            {
+                return context.Districts.Where(x => x.DistrictID == upazila.DistrictId).FirstOrDefault();
             }
         }
         public List<District> GetDistricts(string search, int pageNo,int pageSize)
@@ -421,6 +456,20 @@ namespace MH.Services
             using (var context = new MHDbContext())
             {
                 return context.Upazilas.ToList();
+            }
+        }
+        public List<Upazila> GetUpazilaByDistrictId(int DistrictId)
+        {
+            using (var context = new MHDbContext())
+            {
+                return context.Upazilas.Where(x => x.DistrictId == DistrictId).ToList();
+            }
+        }
+        public Upazila GetUpazilaByUserAddressUpazilla(UAddress uAddress)
+        {
+            using (var context = new MHDbContext())
+            {
+                return context.Upazilas.Where(x => x.UpazilaID == uAddress.Upazilla).FirstOrDefault();
             }
         }
         public List<Upazila> GetUpazilas(string search, int pageNo, int pageSize)

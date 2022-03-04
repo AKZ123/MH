@@ -1,4 +1,5 @@
 ﻿using MH.Services;
+using MH.Entities;
 using MH.Web.ViewModels;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -216,6 +217,91 @@ namespace MH.Web.Controllers
         //    }
         //    return PartialView("_UserComments", model);
         //}
+
+        public async Task<ActionResult> UserAddressIndex(string userID)
+        {
+            UserAddressIndexViewModel model = new UserAddressIndexViewModel();
+
+            if (!string.IsNullOrEmpty(userID))
+            {
+                model.user = await UserManager.FindByIdAsync(userID);
+
+                if (model.user != null)
+                {
+                    //model.UserRoles = model.User.Roles.Select(userRole => model.AvailableRoles.FirstOrDefault(role => role.Id == userRole.RoleId)).ToList();
+                }
+            }
+            //return PartialView("_UserAddress", model);
+            return PartialView("UserAddressIndex", model);
+        }
+        public async Task<ActionResult> UserAddressTable(string userID)
+        {
+            UserAddressListingViewModel model = new UserAddressListingViewModel();
+
+            if (!string.IsNullOrEmpty(userID))
+            {
+                model.User = await UserManager.FindByIdAsync(userID);
+
+                if (model.User != null)
+                {
+                    //model.UserRoles = model.User.Roles.Select(userRole => model.AvailableRoles.FirstOrDefault(role => role.Id == userRole.RoleId)).ToList();
+                    model.UAddresses = UserAllOtherService.Instance.GetUserAddresses(model.User.Id);
+                }
+            }
+            //return PartialView("_UserAddress", model);
+            return PartialView("UserAddressTable", model);
+        }
+
+        public async Task<ActionResult> AddUserAddress(string userID)
+        {
+            UserAddressAddViewModel model = new UserAddressAddViewModel();
+            if (!string.IsNullOrEmpty(userID))
+            {
+                model.User = await UserManager.FindByIdAsync(userID);
+                if (model.User != null)
+                {
+                    model.AvailableCountrys = AddressService.Instance.GetAllCountries();                    
+                    return PartialView("UserAddressAdd", model);
+                }
+            }
+
+            return RedirectToAction("UserAddress", new { userID = userID });
+        }
+        //public ActionResult GetDivisionList(int countryID)
+        //{
+        //    ViewBag.DivisionList = new SelectList(AddressService.Instance.GetDivisionsByCountryId(countryID), "DivisionID", "Name");
+        //    return PartialView("UserAddressDivisions");
+        //}
+        public JsonResult GetDivision(int countryID)
+        {
+            List<NameViewModel> n = new List<NameViewModel>();
+            List<Division> divisions = AddressService.Instance.GetDivisionsByCountryId(countryID);
+            foreach (var i in divisions)
+            {
+                n.Add(new NameViewModel { ID = i.DivisionID,Name=i.Name });
+            }
+            return Json(n, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult GetDistrict(int divisionID)
+        {
+            List<NameViewModel> n = new List<NameViewModel>();
+            List<District> districts = AddressService.Instance.GetDistrictByDivisionsId(divisionID);
+            foreach (var i in districts)
+            {
+                n.Add(new NameViewModel { ID = i.DistrictID, Name = i.Name });
+            }
+            return Json(n, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult GetUpazila(int upazilaID)
+        {
+            List<NameViewModel> n = new List<NameViewModel>();
+            List<Upazila> upazilas = AddressService.Instance.GetUpazilaByDistrictId(upazilaID);
+            foreach (var i in upazilas)
+            {
+                n.Add(new NameViewModel { ID = i.UpazilaID, Name = i.Name });
+            }
+            return Json(n, JsonRequestBehavior.AllowGet);
+        }
 
     }
 }

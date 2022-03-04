@@ -16,8 +16,8 @@ namespace MH.Entities
         [ForeignKey("UserId")]
         public virtual ApplicationUser ApplicationUser { get; set; }
 
-        public AddressType Type { get; set; }
-        public int Upazilla { get; set; }//from Dropdown
+        public AddressType? Type { get; set; }
+        public int? Upazilla { get; set; }//from Dropdown
         public string VillageOrTown { get; set; }
         public string RoadName { get; set; }
         public string HouseName { get; set; }

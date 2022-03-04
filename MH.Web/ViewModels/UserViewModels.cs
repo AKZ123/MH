@@ -37,4 +37,42 @@ namespace MH.Web.ViewModels
         public ApplicationUser User { get; internal set; }
         public IEnumerable<ApplicationRole> UserRoles { get; internal set; }
     }
+    public class UserAddressIndexViewModel
+    {        
+        public ApplicationUser user { get; internal set; }
+    }
+    public class UserAddressListingViewModel
+    {
+        public List<UAddress> UAddresses { get; internal set; }
+        public ApplicationUser User { get; internal set; }
+        //public IEnumerable<AddressType> AddressTypes { get; internal set; }
+    }
+    public class UserAddressAddViewModel
+    {
+        public AddressType? Type { get; set; }
+        public int? Upazilla { get; set; }//from Dropdown
+        public string VillageOrTown { get; set; }
+        public string RoadName { get; set; }
+        public string HouseName { get; set; }
+        public string HoldingNumber { get; set; }
+        public string Flat { get; set; }
+        public List<Country> AvailableCountrys { get; set; }
+        public List<Division> AvailableDivisiones { get; set; }
+        public List<District> AvailableDistrictes { get; set; }
+        public List<Upazila> AvailableUpazilas { get; set; }
+
+        //public UAddress uAddress { get;  set; }
+        public string UserId { get; set; }
+        public ApplicationUser User { get;  set; }
+        //public string UserID { get; set; }
+        //public Country Country { get;  set; }
+        //public Division Division { get;  set; }
+        //public District District { get;  set; }
+        //public Upazila Upazila { get;  set; }
+        public int CounteyID { get; set; }
+        public int DivisionID { get; set; }
+        public int DistrictID { get; set; }
+        public int UpazilaID { get; set; }
+
+    }
 }

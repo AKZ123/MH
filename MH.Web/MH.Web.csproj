@@ -331,6 +331,9 @@
     <Content Include="Views\State\StateTable.cshtml" />
     <Content Include="Views\State\Create.cshtml" />
     <Content Include="Views\State\Edit.cshtml" />
+    <Content Include="Views\User\UserAddressAdd.cshtml" />
+    <Content Include="Views\User\UserAddressIndex.cshtml" />
+    <Content Include="Views\User\UserAddressTable.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

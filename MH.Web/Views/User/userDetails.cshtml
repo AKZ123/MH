@@ -44,6 +44,9 @@
                             <a class="user-link nav-link active" data-href="@Url.Action("userDetails", "User", new { userID = Model.User.Id, IsPartial=true })">Info</a>
                         </li>
                         <li class="nav-item">
+                            <a class="user-link nav-link" href="#" data-href="@Url.Action("UserAddressIndex", "User", new { userID = Model.User.Id})">Address</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="user-link nav-link" href="#" data-href="@Url.Action("UserRoles", "User", new { userID = Model.User.Id})">Roles</a>
                         </li>
                         <li class="nav-item">
@@ -87,3 +90,13 @@ else
         No User found.
     </div>
 }
+
+
+@*//by Kader*@
+<script>
+    function focusAction(controlToFocus) {
+        $('html, body').animate({
+            scrollTop: $("#" + controlToFocus).offset().top - 100
+        }, 1000);
+    }
+</script>

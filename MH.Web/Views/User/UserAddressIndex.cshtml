@@ -1,0 +1,78 @@
+﻿@model MH.Web.ViewModels.UserAddressIndexViewModel
+@{
+    ViewBag.Title = "User Address";
+}
+
+@if (Model != null && Model.user != null)
+{
+    <section class="flat-row flat-iconbox">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="title-section">
+                        <h4 class="title">
+                            User Addresses
+                        </h4>
+                    </div>
+                </div>
+            </div>
+            <div id="tableContiner">
+                @{ Html.RenderAction("UserAddressTable", new { userID = Model.user.Id }); }
+
+                @*@{Html.RenderAction("ProductTable");
+                    }*@
+            </div>
+            <hr />
+            <div id="actionContainer">
+            </div>
+        </div>
+    </section>
+}
+else
+{
+    <div class="alert alert-danger" role="alert">
+        No User found whereof address you look for.
+    </div>
+}
+
+
+<script>
+        $("#CountryId___no use").change(function () {
+        debugger;
+            var counteyId = $("#CountryId").val();
+            $.ajax({
+			type: 'POST',
+			url: '@Url.Action("GetDivision", "User")',
+			dataType: 'json',
+            data: counteyId,
+			contentType: false,
+			processData: false
+		})
+        .done(function (response) {
+        	console.log(response);
+        	if (response.Success) {
+                $("#DivisionID").empty();
+                $.each(response, function (index, row) {
+                    $("#DivisionID").append("<option value='" + row.DivisionID + "'>" + row.Name + "</option>")
+                });
+        	}
+        })
+        .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+        	alert("FAIL");
+        });
+            //$.get("/User/GetDivision", { countryID: $("#CountryId").val() },
+            //    function (data) {
+            //        $("#DivisionID").empty();
+            //        $.each(data, function (index, row) {
+            //            $("#DivisionID").append("<option value='" + row.DivisionID + "'>" + row.Name + "</option>")
+            //        });
+            //    });
+        })
+
+        //function focusAction(controlToFocus) {
+        //    $('html, body').animate({
+        //        scrollTop: $("#" + controlToFocus).offset().top - 100
+        //    }, 1000);
+        //}
+</script>
+
