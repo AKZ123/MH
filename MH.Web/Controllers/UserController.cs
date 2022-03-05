@@ -255,9 +255,21 @@ namespace MH.Web.Controllers
         public async Task<ActionResult> AddUserAddress(string userID)
         {
             UserAddressAddViewModel model = new UserAddressAddViewModel();
+            List<NameViewModel> n = new List<NameViewModel>();
             if (!string.IsNullOrEmpty(userID))
             {
                 model.User = await UserManager.FindByIdAsync(userID);
+                foreach (AddressType e in Enum.GetValues(typeof(AddressType)))
+                {
+                    n.Add(new NameViewModel { ID = (int)e, Name = e.ToString() });
+                }
+                model.addressType = n;
+                //var enumData = from AddressType e in Enum.GetValues(typeof(AddressType))
+                //               select new
+                //               {
+                //                   ID = (int)e,
+                //                   Name = e.ToString()
+                //               };
                 if (model.User != null)
                 {
                     model.AvailableCountrys = AddressService.Instance.GetAllCountries();                    

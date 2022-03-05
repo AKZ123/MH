@@ -5,159 +5,186 @@
     if (Model.User != null)
     {
         <h4>Add Address</h4>
-        <form id="userAddress">
-            <table width="100%" border="0" cellpadding="3" cellspacing="0" class="bdr-body">
-                <tbody>
-                    <tr>
-                        <td width="30%" bgcolor="#B3CBE6">Address Type<span class="black10">[*]</span></td>
-                        <td width="70%" bgcolor="#B3CBE6">
-                            @*@Html.EnumDropDownListFor(x => x.uAddress.Type, "Select Type", new { @class = "form-control" })*@
-                            @*<input name="present_care" type="text" class="field-100" id="present_care" onkeypress="return alpha(event,letters)">*@
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><label>Country</label> </td>
-                        <td>
-                            <div class="form-group">
-                                <select class="form-control" name="CategoryID">
-                                    @foreach (var country in Model.AvailableCountrys)
-                                    {
-                                        <option value="@country.CountryID">@country.Name</option>
-                                    }
-                                </select>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+
+                    <div class="card-body">
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">@*Gender*@</label>
+                            <div class="col-sm-10">
+                                @* @Html.EnumDropDownListFor(x => x.User.Gender, "Select Gender", new { @class = "form-control" })*@
+                                @*<input name="FullName" type="text" class="form-control" value="@Model.User.Gender" required />*@
                             </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td width="30%" bgcolor="#B3CBE6">Country<span class="black10">[*]</span></td>
-                        <td width="70%" bgcolor="#B3CBE6">
-                            <select id="CountrySelect" style="width:300px">
-                                <option value="-1">Select a Country</option>
-                                @foreach (var country in Model.AvailableCountrys)
-                                {
-                                    <option value="@country.CountryID">@country.Name</option>
-                                }
-                            </select>
-                            @*@if (ViewBag.CountryList != null)
+                        </div>
+                        <form id="userAddress">
+                            <table width="100%" border="0" cellpadding="3" cellspacing="0" class="bdr-body">
+                                <tbody>
+                                    @*<tr>
+            <td><label>type</label> </td>
+            <td>
+                <div class="form-group">
+                    <select class="form-control" name="CategoryID">
+                        @foreach (var t in Enum.GetValues(typeof(MH.Entities.AddressType)))
+                        {
+                            <option value="@t">@t.ToString()</option>
+                        }
+                    </select>
+                </div>
+            </td>
+        </tr>*@
+                                    @*<tr>
+            <td width="30%" bgcolor="#B3CBE6">Address Type<span class="black10">[*#]</span></td>
+            <td width="70%" bgcolor="#B3CBE6">
+                @Html.EnumDropDownListFor(x => x.Type, "-select Address type", new { @class = "form-control" })
+            </td>
+        </tr>*@
+                                    <tr>
+                                        <td width="30%" bgcolor="#B3CBE6">Address Type<span class="black10">[*]</span></td>
+                                        <td width="70%" bgcolor="#B3CBE6">
+                                            <select id="Type" style="width:300px; height:50px" name="Type">
+                                                @foreach (var type in Model.addressType)
+                                                {
+                                                    <option value="@type.ID">@type.Name</option>
+                                                }
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    @*<tr>
+                                        <td><label>Country</label> </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <select class="form-control" name="CategoryID">
+                                                    @foreach (var country in Model.AvailableCountrys)
+                                                    {
+                                                        <option value="@country.CountryID">@country.Name</option>
+                                                    }
+                                                </select>
+                                            </div>
+                                        </td>
+                                    </tr>*@
+                                    <tr>
+                                        <td width="30%" bgcolor="#B3CBE6">Country<span class="black10">[*]</span></td>
+                                        <td width="70%" bgcolor="#B3CBE6">
+                                            <select id="CountrySelect" style="width:300px;height:45px">
+                                                <option value="-1">Select a Country</option>
+                                                @foreach (var country in Model.AvailableCountrys)
+                                                {
+                                                    <option value="@country.CountryID">@country.Name</option>
+                                                }
+                                            </select>
+                                            @*@if (ViewBag.CountryList != null)
                 {
                     @Html.DropDownListFor(x => x.CounteyID, ViewBag.CountryList as SelectList, "--Select Country--", new { @class = "form-control" })
                 }*@
-                            @*@Html.DropDownListFor(x => x.Country.Name, "Select Country", new { @class = "form-control" })*@
-                        </td>
-                    </tr>
-                    <tr>
-                        <td width="30%" bgcolor="#B3CBE6">Division<span class="black10">[*]</span></td>
-                        <td width="70%" bgcolor="#B3CBE6">
-                            <select id="DivisionSelect" style="width:300px">
-                            </select>
-                            @*@Html.DropDownListFor(x => x.DivisionID, new SelectList(" "), "--Select Division--", new { @class = "form-control" })*@
-                        </td>
-                    </tr>
-                    <tr>
-                        <td width="30%" bgcolor="#B3CBE6">District<span class="black10">[*]</span></td>
-                        <td width="70%" bgcolor="#B3CBE6">
-                            <select id="DistrictSelect" style="width:300px">
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td width="30%" bgcolor="#B3CBE6">Upazila<span class="black10">[*]</span></td>
-                        <td width="70%" bgcolor="#B3CBE6">
-                            <select id="UpazilaSelect" style="width:300px">
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td width="30%" bgcolor="#B3CBE6">Country<span class="black10">[*]</span></td>
-                        <td width="70%" bgcolor="#B3CBE6">
-                            @*@Html.EnumDropDownListFor(x => x.Upazila.Name, "Select Country", new { @class = "form-control" })*@
-                        </td>
-                    </tr>
-                    <tr>
-                        <td bgcolor="#B3CBE6">
-                            Village/Town
-                        </td>
-                        <td bgcolor="#B3CBE6">
-                            @*<input name="Country" type="text" class="form-control" value="@Model.uAddress.VillageOrTown" />*@
-                        </td>
-                    </tr>
-                    <tr>
-                        <td bgcolor="#B3CBE6">
-                            Road Name
-                        </td>
-                        <td bgcolor="#B3CBE6">
-                            @*<input name="RoadName" type="text" class="form-control" value="@Model.uAddress.RoadName" />*@
-                        </td>
-                    </tr>
-                    <tr>
-                        <td bgcolor="#B3CBE6">
-                            HouseName
-                        </td>
-                        <td bgcolor="#B3CBE6">
-                            @*<input name="Country" type="text" class="form-control" value="@Model.uAddress.HouseName" />*@
-                        </td>
-                    </tr>
-                    <tr>
-                        <td bgcolor="#B3CBE6">
-                            HoldingNumber
-                        </td>
-                        <td bgcolor="#B3CBE6">
-                            @*<input name="Country" type="text" class="form-control" value="@Model.uAddress.HoldingNumber" />*@
-                        </td>
-                    </tr>
-                    <tr>
-                        <td bgcolor="#B3CBE6">
-                            Flat
-                        </td>
-                        <td bgcolor="#B3CBE6">
-                            @*<input name="Country" type="text" class="form-control" value="@Model.uAddress.Flat" />*@
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                                            @*@Html.DropDownListFor(x => x.Country.Name, "Select Country", new { @class = "form-control" })*@
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="30%" bgcolor="#B3CBE6">Division<span class="black10">[*]</span></td>
+                                        <td width="70%" bgcolor="#B3CBE6">
+                                            <select id="DivisionSelect" style="width:300px">
+                                            </select>
+                                            @*@Html.DropDownListFor(x => x.DivisionID, new SelectList(" "), "--Select Division--", new { @class = "form-control" })*@
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="30%" bgcolor="#B3CBE6">District<span class="black10">[*]</span></td>
+                                        <td width="70%" bgcolor="#B3CBE6">
+                                            <select id="DistrictSelect" style="width:300px">
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="30%" bgcolor="#B3CBE6">Upazila<span class="black10">[*]</span></td>
+                                        <td width="70%" bgcolor="#B3CBE6">
+                                            <input type="hidden" id="Upazilla" name="Upazilla" />    @*this or |*@
+                                            <select id="UpazilaSelect" style="width:300px" name="Upazilla">
+                                            </select>
+                                        </td>
+                                    </tr>
 
+                                    <tr>
+                                        <td bgcolor="#B3CBE6">
+                                            Village/Town
+                                        </td>
+                                        <td bgcolor="#B3CBE6">
+                                            <input name="VillageOrTown" type="text" class="form-control" placeholder="Village Name" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td bgcolor="#B3CBE6">
+                                            Road Name
+                                        </td>
+                                        <td bgcolor="#B3CBE6">
+                                            <input name="RoadName" type="text" class="form-control" placeholder="ex: Vegum Rokeya Avenue" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td bgcolor="#B3CBE6">
+                                            House Name
+                                        </td>
+                                        <td bgcolor="#B3CBE6">
+                                            <input name="HouseName" type="text" class="form-control" placeholder="Shopno Vila" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td bgcolor="#B3CBE6">
+                                            Holding Number
+                                        </td>
+                                        <td bgcolor="#B3CBE6">
+                                            <input name="HoldingNumber" type="text" class="form-control" placeholder="501/9" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td bgcolor="#B3CBE6">
+                                            Flat
+                                        </td>
+                                        <td bgcolor="#B3CBE6">
+                                            <input name="Flat" type="text" class="form-control" placeholder="3A" />
+                                            @*<input name="Country" type="text" class="form-control" value="@Model.uAddress.Flat" />*@
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td bgcolor="#B3CBE6">  </td>
+                                        <td bgcolor="#B3CBE6"> </td>
+                                    </tr>
+                                    <tr>
+                                        <td bgcolor="#B3CBE6">  </td>
+                                        <td bgcolor="#B3CBE6">
+                                            <div class="form-group">
+                                                <div class="offset-sm-2 col-sm-10">
+                                                    <div class="btn-group float-right" role="group">
+                                                        <button id="saveBtn" type="button" class="btn btn-success"><i class="fas fa-edit"></i> Save</button>
+                                                        
+                                                    </div>
+                                                    <div class="btn-group float-right" role="group">
+                                                        
+                                                        <button id="cancelBtn" type="button" class="btn btn-primary">Cancel</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        
+                                    </tr>
+                                </tbody>
+                            </table>
 
+                        </form>
 
-
-            <div class="row">
-                <div class="col-md-8">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">Gender</label>
-                                <div class="col-sm-10">
-                                    @Html.EnumDropDownListFor(x => x.User.Gender, "Select Gender", new { @class = "form-control" })
-                                    @*<input name="FullName" type="text" class="form-control" value="@Model.User.Gender" required />*@
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">Country</label>
-                                <div class="col-sm-10">
-                                    @*<input name="Country" type="text" class="form-control" value="@Model.User.Country" />*@
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            <div class="form-group row">
-                <div class="offset-sm-2 col-sm-10">
-                    <div class="btn-group float-right" role="group">
-                        <button id="saveBtn" type="button" class="btn btn-success"><i class="fas fa-edit"></i> Save</button>
-                        <button id="cancelBtn" type="button" class="btn btn-primary">Cancel</button>
                     </div>
                 </div>
             </div>
-        </form>
-        }
+
+        </div>
+
+    }
     else
     {
         <div class="alert alert-warning" role="alert">
-    No User found for adding address.
-</div>
-        
+            No User found for adding address.
+        </div>
+
     }
 }
 
@@ -167,8 +194,13 @@
     var DivisionSelect = $('#DivisionSelect');
     var DistrictSelect = $('#DistrictSelect');
     var UpazilaSelect = $('#UpazilaSelect');
+    //var Type = $('#Type');
+    //var type = $('#Type option:selected').val();
+    //if (type == "") {  /*&& upazilaId != -1*/
+    //    type.value('-1');
+    //}
 
-    ////CountrySelect.empty();    
+    ////CountrySelect.empty();
     ////CountrySelect.append($('<option/>', { value: -1, text: 'Select Division' }));
     ////CountrySelect.value('-1');
     ////CountrySelect.prop('disabled', true);
@@ -229,6 +261,23 @@
             }
 		})
     });
+
+    UpazilaSelect.change(function () {
+        var upazilaId = $('#UpazilaSelect option:selected').val();
+        if (upazilaId.length > 0) {  /*&& upazilaId != -1*/
+            $("#Upazilla").val(upazilaId);
+            /*alert(upazilaId);*/
+        }
+    });
+    //Type.change(function () {
+    //    var type = $('#Type option:selected').val();
+    //    //if (type == "") {  /*&& upazilaId != -1*/
+    //    alert(type);
+    //    //}
+    //    //if (type != null) {  /*&& upazilaId != -1*/
+    //    //    alert('null');
+    //    //}
+    //});
 
     //$('#CountrySelect').on('change', function () {
     //    alert('test');

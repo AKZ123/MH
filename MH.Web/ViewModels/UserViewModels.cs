@@ -2,6 +2,7 @@
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -49,30 +50,33 @@ namespace MH.Web.ViewModels
     }
     public class UserAddressAddViewModel
     {
+        [Required]
         public AddressType? Type { get; set; }
-        public int? Upazilla { get; set; }//from Dropdown
+        [Required]
+        public int? Upazilla { get; set; }
+        [Required]
         public string VillageOrTown { get; set; }
         public string RoadName { get; set; }
         public string HouseName { get; set; }
         public string HoldingNumber { get; set; }
         public string Flat { get; set; }
+        //public UAddress uAddress { get;  set; }
+        public List<NameViewModel> addressType { get; set; }
         public List<Country> AvailableCountrys { get; set; }
         public List<Division> AvailableDivisiones { get; set; }
         public List<District> AvailableDistrictes { get; set; }
         public List<Upazila> AvailableUpazilas { get; set; }
 
-        //public UAddress uAddress { get;  set; }
-        public string UserId { get; set; }
+        //public string UserId { get; set; }
         public ApplicationUser User { get;  set; }
-        //public string UserID { get; set; }
         //public Country Country { get;  set; }
         //public Division Division { get;  set; }
         //public District District { get;  set; }
         //public Upazila Upazila { get;  set; }
-        public int CounteyID { get; set; }
-        public int DivisionID { get; set; }
-        public int DistrictID { get; set; }
-        public int UpazilaID { get; set; }
+        //public int CounteyID { get; set; }
+        //public int DivisionID { get; set; }
+        //public int DistrictID { get; set; }
+        //public int UpazilaID { get; set; }
 
     }
 }
