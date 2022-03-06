@@ -63,11 +63,11 @@ namespace MH.Web.ViewModels
         //public UAddress uAddress { get;  set; }
         public List<NameViewModel> addressType { get; set; }
         public List<Country> AvailableCountrys { get; set; }
-        public List<Division> AvailableDivisiones { get; set; }
-        public List<District> AvailableDistrictes { get; set; }
-        public List<Upazila> AvailableUpazilas { get; set; }
+        //public List<Division> AvailableDivisiones { get; set; }
+        //public List<District> AvailableDistrictes { get; set; }
+        //public List<Upazila> AvailableUpazilas { get; set; }
 
-        //public string UserId { get; set; }
+        public string UserId { get; set; }
         public ApplicationUser User { get;  set; }
         //public Country Country { get;  set; }
         //public Division Division { get;  set; }

@@ -259,26 +259,66 @@ namespace MH.Web.Controllers
             if (!string.IsNullOrEmpty(userID))
             {
                 model.User = await UserManager.FindByIdAsync(userID);
-                foreach (AddressType e in Enum.GetValues(typeof(AddressType)))
+                if (model.User != null)
                 {
-                    n.Add(new NameViewModel { ID = (int)e, Name = e.ToString() });
-                }
-                model.addressType = n;
+                    foreach (AddressType e in Enum.GetValues(typeof(AddressType)))
+                    {
+                        n.Add(new NameViewModel { ID = (int)e, Name = e.ToString() });
+                    }
+                    model.addressType = n;
                 //var enumData = from AddressType e in Enum.GetValues(typeof(AddressType))
                 //               select new
                 //               {
                 //                   ID = (int)e,
                 //                   Name = e.ToString()
                 //               };
-                if (model.User != null)
-                {
+                
                     model.AvailableCountrys = AddressService.Instance.GetAllCountries();                    
-                    return PartialView("UserAddressAdd", model);
+                    
                 }
             }
-
-            return RedirectToAction("UserAddress", new { userID = userID });
+            return PartialView("UserAddressAdd", model);
+            //return RedirectToAction("UserAddress", new { userID = userID });
         }
+
+        [HttpPost]
+        public async Task<ActionResult> AddUserAddress(UserAddressAddViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var newUAddress = new UAddress(); 
+
+                newUAddress.Type = model.Type;
+                newUAddress.Upazilla = model.Upazilla;
+                newUAddress.VillageOrTown = model.VillageOrTown;
+                newUAddress.RoadName = model.RoadName;
+                newUAddress.HouseName = model.HouseName;
+                newUAddress.HoldingNumber = model.HoldingNumber;
+                newUAddress.Flat = model.Flat;
+                if (!string.IsNullOrEmpty(model.UserId))
+                {
+                    //newUAddress.ApplicationUser = await UserManager.FindByIdAsync(model.UserId);
+                    model.User = await UserManager.FindByIdAsync(model.UserId);
+                    newUAddress.UserId = model.User.Id;
+                }
+
+                try
+                {
+                    UserAllOtherService.Instance.SaveUserAddress(newUAddress);
+                    //return RedirectToAction("ProductTable");
+                    return RedirectToAction("UserAddressTable", new { userID = model.User.Id });
+                }
+                catch //An entity object cannot be referenced by multiple instances of IEntityChangeTracker.
+                {
+                    return PartialView("UserAddressAdd", model);
+                    //return View();
+                }
+                
+            }
+            return PartialView("UserAddressAdd", model);
+        }
+
+        #region AddUserAddressHelper
         //public ActionResult GetDivisionList(int countryID)
         //{
         //    ViewBag.DivisionList = new SelectList(AddressService.Instance.GetDivisionsByCountryId(countryID), "DivisionID", "Name");
@@ -290,7 +330,7 @@ namespace MH.Web.Controllers
             List<Division> divisions = AddressService.Instance.GetDivisionsByCountryId(countryID);
             foreach (var i in divisions)
             {
-                n.Add(new NameViewModel { ID = i.DivisionID,Name=i.Name });
+                n.Add(new NameViewModel { ID = i.DivisionID, Name = i.Name });
             }
             return Json(n, JsonRequestBehavior.AllowGet);
         }
@@ -314,6 +354,7 @@ namespace MH.Web.Controllers
             }
             return Json(n, JsonRequestBehavior.AllowGet);
         }
+        #endregion
 
     }
 }

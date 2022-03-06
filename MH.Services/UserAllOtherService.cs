@@ -89,17 +89,15 @@ namespace MH.Services
         //        }
         //    }
         //}
-        //public void SaveUserAddress(UAddress address)
-        //{
-        //    //  use   ( Reposetory)
-        //    using (var context = new MHDbContext())
-        //    {
-        //        context.Entry(address.ApplicationUser).State = System.Data.Entity.EntityState.Unchanged;
-        //        //context.Entry(product.Category).State = System.Data.Entity.EntityState.Unchanged;
-        //        context.UAddress.Add(address);
-        //        context.SaveChanges();
-        //    }
-        //}
+        public void SaveUserAddress(UAddress address)
+        {
+            using (var context = new MHDbContext())
+            {
+                //context.Entry(address.ApplicationUser).State = System.Data.Entity.EntityState.Unchanged;
+                context.UAddress.Add(address);
+                context.SaveChanges();
+            }
+        }
         //public List<UAddress> GetAllAddress()
         //{
         //    using (var context = new MHDbContext())
