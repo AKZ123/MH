@@ -472,6 +472,13 @@ namespace MH.Services
                 return context.Upazilas.Where(x => x.UpazilaID == uAddress.Upazilla).FirstOrDefault();
             }
         }
+        public string GetUpazilaNameByUserAddressUpazilla(UAddress uAddress)
+        {
+            using (var context = new MHDbContext())
+            {
+                return context.Upazilas.Where(x => x.UpazilaID == uAddress.Upazilla).Select(x=>x.Name).FirstOrDefault();
+            }
+        }
         public List<Upazila> GetUpazilas(string search, int pageNo, int pageSize)
         {
             //int pageSize = 10;

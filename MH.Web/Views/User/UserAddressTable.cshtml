@@ -1,7 +1,7 @@
 ﻿@model MH.Web.ViewModels.UserAddressListingViewModel
 
 @*<h4>User Address</h4>*@
-@if (Model.UAddresses != null && Model.UAddresses.Count() > 0)
+@if (Model.UAddressesView != null && Model.UAddressesView.Count() > 0)
 {
     var i = 1;
 
@@ -21,12 +21,12 @@
         </thead>
 
         <tbody>
-            @foreach (var address in Model.UAddresses)
+            @foreach (var address in Model.UAddressesView)
             {
                 <tr>
                     <td scope="row">@i</td>
                     <td>@address.Type</td>
-                    <td>@address.Upazilla</td>
+                    <td>@address.UpazillaName</td>
                     <td>@address.VillageOrTown</td>
                     <td>@address.RoadName</td>
                     <td>@address.HouseName</td>
@@ -59,7 +59,7 @@ else
     </div>
 }
 
-@if (Model.UAddresses == null)
+@if (Model.UAddressesView == null)
 {
     <table class="table">
         <tbody>
@@ -74,7 +74,7 @@ else
         </tbody>
     </table>
 }
-else if (Model.UAddresses != null && Model.UAddresses.Count() == 1)
+else if (Model.UAddressesView != null && Model.UAddressesView.Count() == 1)
 {
     <table class="table">
         <tbody>
@@ -90,7 +90,7 @@ else if (Model.UAddresses != null && Model.UAddresses.Count() == 1)
         </tbody>
     </table>
 }
-else if (Model.UAddresses != null && Model.UAddresses.Count() == 2)
+else if (Model.UAddressesView != null && Model.UAddressesView.Count() == 2)
 {
     <h5>your Present And Parmanent Address added.</h5>
 }

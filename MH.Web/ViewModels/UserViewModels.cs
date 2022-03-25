@@ -44,9 +44,22 @@ namespace MH.Web.ViewModels
     }
     public class UserAddressListingViewModel
     {
-        public List<UAddress> UAddresses { get; internal set; }
+        public List<UAddressView> UAddressesView { get; internal set; }
+        //public List<UAddress> UAddresses { get; internal set; }
         public ApplicationUser User { get; internal set; }
         //public IEnumerable<AddressType> AddressTypes { get; internal set; }
+    }
+    public class UAddressView
+    {
+        public int AddressID { get; set; }
+        //public string UserId { get; set; }       
+        public AddressType? Type { get; set; }
+        public string UpazillaName { get; set; }
+        public string VillageOrTown { get; set; }
+        public string RoadName { get; set; }
+        public string HouseName { get; set; }
+        public string HoldingNumber { get; set; }
+        public string Flat { get; set; }
     }
     public class UserAddressAddViewModel
     {

@@ -237,15 +237,29 @@ namespace MH.Web.Controllers
         public async Task<ActionResult> UserAddressTable(string userID)
         {
             UserAddressListingViewModel model = new UserAddressListingViewModel();
-
+            List<UAddressView> uA = new List<UAddressView>();
             if (!string.IsNullOrEmpty(userID))
             {
                 model.User = await UserManager.FindByIdAsync(userID);
 
                 if (model.User != null)
                 {
-                    //model.UserRoles = model.User.Roles.Select(userRole => model.AvailableRoles.FirstOrDefault(role => role.Id == userRole.RoleId)).ToList();
-                    model.UAddresses = UserAllOtherService.Instance.GetUserAddresses(model.User.Id);
+                    //model.UAddresses = UserAllOtherService.Instance.GetUserAddresses(model.User.Id);
+                    foreach (UAddress a in UserAllOtherService.Instance.GetUserAddresses(model.User.Id))
+                    {
+                        uA.Add(new UAddressView {
+                            AddressID = a.AddressID,
+                            Type = a.Type,
+                            UpazillaName = AddressService.Instance.GetUpazilaNameByUserAddressUpazilla(a),
+                            //UpazillaNane=a.Upazilla,
+                            VillageOrTown = a.VillageOrTown,
+                            RoadName = a.RoadName,
+                            HouseName = a.HouseName,
+                            HoldingNumber = a.HoldingNumber,
+                            Flat = a.Flat
+                        });
+                    }
+                    model.UAddressesView = uA;
                 }
             }
             //return PartialView("_UserAddress", model);
