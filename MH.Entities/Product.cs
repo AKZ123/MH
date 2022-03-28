@@ -32,6 +32,9 @@ namespace MH.Entities
         public virtual Company Company { get; set; }
 
         public List<Batch> Batches { get; set; }
-        public IList<ProductState> ProductStates { get; set; }
+        //public IList<ProductState> ProductStates { get; set; }
+        public int StateId { get; set; }
+        [ForeignKey("StateId")]
+        public virtual State State { get; set; }
     }
 }

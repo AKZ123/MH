@@ -123,6 +123,10 @@
     <Compile Include="Migrations\202203012146026_UAddressTypeNull.designer.cs">
       <DependentUpon>202203012146026_UAddressTypeNull.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202203280729206_StatesToProducts.cs" />
+    <Compile Include="Migrations\202203280729206_StatesToProducts.designer.cs">
+      <DependentUpon>202203280729206_StatesToProducts.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -169,6 +173,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202203012146026_UAddressTypeNull.resx">
       <DependentUpon>202203012146026_UAddressTypeNull.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202203280729206_StatesToProducts.resx">
+      <DependentUpon>202203280729206_StatesToProducts.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

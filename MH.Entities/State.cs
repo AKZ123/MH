@@ -12,7 +12,8 @@ namespace MH.Entities
         [Key]
         public int SID { get; set; }
         public string StateName { get; set; }
-        public string PackSizeUnit { get; set; }
-        public IList<ProductState> ProductStates { get; set; }
+        public string PackSizeUnit { get; set; }        
+        public List<Product> Products { get; set; }
+        //public IList<ProductState> ProductStates { get; set; }
     }
 }
