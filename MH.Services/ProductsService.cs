@@ -88,6 +88,7 @@ namespace MH.Services
             {
                 context.Entry(product.Company).State = System.Data.Entity.EntityState.Unchanged;
                 context.Entry(product.Category).State = System.Data.Entity.EntityState.Unchanged;
+                context.Entry(product.State).State = System.Data.Entity.EntityState.Unchanged;
                 context.Products.Add(product);
                 context.SaveChanges();
             }
@@ -117,20 +118,22 @@ namespace MH.Services
                 {
                     return context.Products.Where(product => product.BrandName != null &&
                          product.BrandName.ToLower().Contains(search.ToLower()))
-                         .OrderBy(x => x.PID)
+                         .OrderByDescending(x => x.PID)
                          .Skip((pageNo - 1) * pageSize).Take(pageSize)
                          .Include(x => x.Category)
                          .Include(x => x.Company)
+                         .Include(x=>x.State)
                          .ToList();
                 }
                 else
                 {
                     return context.Products
-                        .OrderBy(X => X.PID)
+                        .OrderByDescending(X => X.PID)
                         .Skip((pageNo - 1) * pageSize)
                         .Take(pageSize)
                         .Include(x => x.Category)
                         .Include(x => x.Company)
+                        .Include(x => x.State)
                         .ToList();
                 }
             }

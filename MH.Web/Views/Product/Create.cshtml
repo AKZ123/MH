@@ -11,6 +11,7 @@
             <div class="form-group">
                 <label>Company Name</label>
                 <select class="form-control" name="CompanyID">
+                    <option value="" selected disabled>Select Company </option>
                     @foreach (var company in Model.AvailableCompanies)
                     {
                         <option value="@company.CmpnyID">@company.CRegisterName</option>
@@ -20,6 +21,7 @@
             <div class="form-group">
                 <label>Category</label>
                 <select class="form-control" name="CategoryID">
+                    <option value="" selected disabled>Select Category  </option>
                     @foreach (var category in Model.AvailableCategories)
                     {
                         <option value="@category.CID">@category.Name</option>
@@ -49,6 +51,16 @@
             <div class="form-group">
                 <label>Pack Size</label>
                 <input class="form-control" name="PackSize" />
+            </div>
+            <div class="form-group">
+                <label>Pack State</label>
+                <select class="form-control" name="StateID">
+                    <option value="" selected disabled>Select State of Medicine  </option>
+                    @foreach (var state in Model.AvailableStates)
+                    {
+                        <option value="@state.SID">@state.StateName  ( @state.PackSizeUnit )</option>
+                    }
+                </select>
             </div>
             <div class="form-group">
                 <label>Image</label>

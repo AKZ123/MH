@@ -104,6 +104,16 @@ namespace MH.Services
                 context.SaveChanges();
             }
         }
-       
+
+        // in Product create////
+        public List<State> GetAllStates()
+        {
+            using (var context = new MHDbContext())
+            {
+                return context.States.ToList();
+            }
+        }
+        /// ////
+
     }
 }

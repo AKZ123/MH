@@ -19,7 +19,7 @@ namespace MH.Web.Controllers
        
         public ActionResult ProductTable(string search, int? pageNo)
         {
-            var pageSize = 5;// ConfigurationsService.Instance.PageSize();
+            var pageSize = 10;// ConfigurationsService.Instance.PageSize();
 
             ProductSearchViewModel model = new ProductSearchViewModel();
             model.SearchTerm = search;
@@ -46,6 +46,7 @@ namespace MH.Web.Controllers
             NewProductViewModel model = new NewProductViewModel();
             model.AvailableCategories = CategoriesService.Instance.GetAllCategories();
             model.AvailableCompanies = CompaniesService.Instance.GetAllCompanies();
+            model.AvailableStates = StateService.Instance.GetAllStates();
             return PartialView(model);
         }
 
@@ -66,6 +67,7 @@ namespace MH.Web.Controllers
             //newProduct.MrpPrice = model.MrpPrice;
             newProduct.Category = CategoriesService.Instance.GetCategory(model.CategoryID);
             newProduct.Company = CompaniesService.Instance.GetCompany(model.CompanyID);
+            newProduct.State = StateService.Instance.GetState(model.StateID);
 
             try
             {
