@@ -44,7 +44,7 @@
                 <th class="font-weight-bold">Generic Name</th>
                 <th class="font-weight-bold">Mfg Lic No</th>
                 <th class="font-weight-bold">DAR No</th>
-                @*<th class="font-weight-bold">ImageURL</th>*@
+                <th class="font-weight-bold">ImageURL</th>
                 <th class="font-weight-bold">Pack Size</th>
                 <th class="font-weight-bold">State</th>
                 <th class="font-weight-bold">Company</th>
@@ -58,64 +58,65 @@
 
                 foreach (var product in Model.Products)
                 {
-                    <tr>
-                        <td>@product.BrandName</td>
-                        <td>@product.Strength</td>
-                        <td>@product.GenericName</td>
-                        <td>@product.MfgLicNo</td>
-                        <td>@product.DARNo</td>
-                        @*<td>@product.ImageURL</td>*@
-                        <td>
-                            @product.PackSize
+                    var imageURL = !string.IsNullOrEmpty(product.ImageURL) ? product.ImageURL : "/Content/image/system/MedicineClipart.png";
+            <tr>
+                <td>@product.BrandName</td>
+                <td>@product.Strength</td>
+                <td>@product.GenericName</td>
+                <td>@product.MfgLicNo</td>
+                <td>@product.DARNo</td>
+                <td> <img src="@imageURL" class="img-thumbnail img-fluid" width="100" height="75"/> </td>
+                <td>
+                    @product.PackSize
 
-                        @if (product.State != null)
-                        {
-                            <text>@product.State.PackSizeUnit</text>
-                        }
-                        else
-                        {
-                            <text>-</text>
-                        }
-                    </td>
-                    <td>
-                        @if (product.State != null)
-                        {
-                            <text>@product.State.StateName</text>
-                        }
-                        else
-                        {
-                            <text>-</text>
-                        }
-                    </td>
-                    <td>
-                        @if (product.Company != null)
-                        {
-                            <text>@product.Company.CmpName</text>
-                        }
-                        else
-                        {
-                            <text>-</text>
-                        }
-                    </td>
-                    <td>
-                        @if (product.Category != null)
-                        {
-                            <text>@product.Category.Name</text>
-                        }
-                        else
-                        {
-                            <text>-</text>
-                        }
-                    </td>
-                    <td class="wrap-td">
-                        <button class="editBtn" data-id="@product.PID">Edit</button>
-                        <button class="deleteBtn" data-id="@product.PID">Delete</button>
-                        <button class="addtoCart" data-id="@product.PID">Add To Cart</button>
+                    @if (product.State != null)
+                    {
+                        <text>@product.State.PackSizeUnit</text>
+                    }
+                    else
+                    {
+                        <text>-</text>
+                    }
+                </td>
+                <td>
+                    @if (product.State != null)
+                    {
+                        <text>@product.State.StateName</text>
+                    }
+                    else
+                    {
+                        <text>-</text>
+                    }
+                </td>
+                <td>
+                    @if (product.Company != null)
+                    {
+                        <text>@product.Company.CmpName</text>
+                    }
+                    else
+                    {
+                        <text>-</text>
+                    }
+                </td>
+                <td>
+                    @if (product.Category != null)
+                    {
+                        <text>@product.Category.Name</text>
+                    }
+                    else
+                    {
+                        <text>-</text>
+                    }
+                </td>
+                <td class="wrap-td">
+                    <button class="editBtn" data-id="@product.PID">Edit</button>
+                    <button class="deleteBtn" data-id="@product.PID">Delete</button>
+                    <button class="addtoCart" data-id="@product.PID">Add To Cart</button>
 
-                        @* <button class="ScreperBtn" data-id="@product.PID">Add a Compare Link</button>*@
+                    @* <button class="ScreperBtn" data-id="@product.PID">Add a Compare Link</button>*@
 
-                    </td>
-                    </tr>
+                </td>
+            </tr>
                 }
             }
             else

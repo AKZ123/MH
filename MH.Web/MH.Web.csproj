@@ -223,6 +223,7 @@
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\css\styles.css" />
+    <Content Include="Content\image\system\MedicineClipart.png" />
     <Content Include="Content\image\system\NoImag.PNG" />
     <Content Include="Content\image\system\profile.png" />
     <Content Include="Content\js\jquery-ui.js" />
