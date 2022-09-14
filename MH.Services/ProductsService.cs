@@ -104,7 +104,7 @@ namespace MH.Services
         {
             using (var context = new MHDbContext())
             {
-                return context.Products.Where(x => x.PID == ID).Include(x => x.Category).Include(x => x.Company).FirstOrDefault();
+                return context.Products.Where(x => x.PID == ID).Include(x => x.Category).Include(x => x.Company).Include(x=>x.State).FirstOrDefault();
                 //return context.Products.Where(x => x.PID == ID).Include(x => x.Category).FirstOrDefault();
                 //return context.Products.Find(ID);
             }

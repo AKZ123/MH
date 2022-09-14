@@ -14,7 +14,7 @@
                     <option value="" selected disabled>Select Company </option>
                     @foreach (var company in Model.AvailableCompanies)
                     {
-                        <option value="@company.CmpnyID">@company.CRegisterName</option>
+                        <option value="@company.CmpnyID">@company.CmpName (@company.CRegisterName)</option>
                     }
                 </select>
             </div>

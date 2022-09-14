@@ -85,6 +85,7 @@
     <Compile Include="CompaniesService.cs" />
     <Compile Include="DashboardService.cs" />
     <Compile Include="MessageService.cs" />
+    <Compile Include="BatchesService.cs" />
     <Compile Include="UserAllOtherService.cs" />
     <Compile Include="ProductsService.cs" />
     <Compile Include="CategoriesService.cs" />

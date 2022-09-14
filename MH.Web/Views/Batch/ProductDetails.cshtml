@@ -1,0 +1,80 @@
+﻿@model MH.Web.ViewModels.ProductWithBatchesViewModel
+
+@{
+    ViewBag.Title = "Medicine Details";
+}
+
+@if (Model != null && Model.Product != null)
+{
+    var defaultImageURL = "/Content/image/system/NoImag.PNG";
+    var imageURL = string.IsNullOrEmpty(Model.Product.ImageURL) ? defaultImageURL : Model.Product.ImageURL;
+
+    <section class="flat-row flat-iconbox">
+        <div class="container">
+            <div class="row">
+                <!-- Page Content-->
+                <div class=" px-4 px-lg-5">
+                    <!-- Heading Row-->
+                    <div class="row gx-4 gx-lg-5 align-items-center my-5">
+                        <div class="col-lg-4"><img class="img-fluid rounded mb-4 mb-lg-0" src="@imageURL" alt="..." /></div>
+                        <div class="col-lg-8">
+                            <div class="row gx-4 gx-lg-5 align-items-center my-5">
+                                <div class="col-lg-7">
+                                    <h1 class="font-weight-light">@Model.Product.BrandName</h1>
+                                    <p>@Model.Product.GenericName</p>
+                                    <p>@Model.Product.Strength</p>
+                                </div>
+                                <div class="col-lg-5">
+                                    <h3 class="font-weight-light">@Model.Product.PackSize  @Model.Product.State.PackSizeUnit</h3>
+                                    <p>@Model.Product.State.StateName</p>
+                                </div>
+                            </div>
+                            <div class="row gx-4 gx-lg-5 align-items-center my-5">
+                                <div class="col-lg-6">
+                                    <table>
+                                        <tr>
+                                            <td>Mfg. Lic. No.</td>
+                                            <td>@Model.Product.MfgLicNo</td>
+                                        </tr>
+                                        <tr>
+                                            <td>DAR. No./MA No.</td>
+                                            <td>@Model.Product.DARNo</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="col-lg-6">
+                                    <h5 class="font-weight-light">@Model.Product.Company.CRegisterName</h5>
+                                    <p>@Model.Product.Company.Address</p>
+                                </div>
+                            </div>
+
+                        </div>                       
+                    </div>
+                    <!-- Call to Action-->
+                     @*<div class="card text-white bg-secondary my-5 py-4 text-center"> 
+                     <div class="card-body"><p class="text-white m-0">This call to action card is a great place to showcase some important information or display a clever tagline!</p></div> 
+                     </div>*@ 
+                    <!-- Content Row-->
+                     @*<div class="row gx-4 gx-lg-5"> 
+                     </div>*@ 
+                </div>
+                <div class="col-md-12">
+                    <div class="title-section">
+                        <h4 class="title">
+                            Medicine Batches
+                        </h4>
+                    </div>
+                </div>
+            </div>
+            <div id="tableContiner">
+                @{ Html.RenderAction("ProductBatchesTable", new { PID = Model.Product.PID});}
+                @*@{ Html.RenderAction("ProductBatchesTable");}*@
+            </div>
+            <hr />
+            <div id="actionContainer">
+            </div>
+        </div>
+    </section>
+
+}
+

@@ -15,7 +15,7 @@
                     @foreach (var company in Model.AvailableCompanies)
                     {
                         var selected = company.CmpnyID == Model.CompanyID ? "selected" : string.Empty;
-                        <option value="@company.CmpnyID" @selected>@company.CRegisterName</option>
+                        <option value="@company.CmpnyID" @selected>@company.CmpName (@company.CRegisterName)</option>
                     }
                 </select>
             </div>
@@ -54,6 +54,16 @@
                 <input class="form-control" name="PackSize" value="@Model.PackSize" />
             </div>
             <div class="form-group">
+                <label>Pack State</label>
+                <select class="form-control" name="StateID">
+                    @foreach (var state in Model.AvailableStates)
+                    {
+                        var selected = state.SID == Model.StateID ? "selected" : string.Empty;
+                        <option value="@state.SID" @selected>@state.StateName (@state.PackSizeUnit)</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
                 <label>Image</label>
                 <input type="hidden" id="ImageURL" name="ImageURL" />
                 <input class="form-control" id="imageUpload" name="Image" type="file" accept=".png, .jpg" />
@@ -71,10 +81,10 @@
 <script>
 	$('#editProduct').validate({
 		rules: {
-			Name: {
+            BrandName: {
 				required: true,
-				minlength: 5,
-				maxlength: 50,
+				minlength: 1,
+				maxlength: 99,
 			},
 			Description: {
 				maxlength: 500
@@ -84,10 +94,10 @@
 			}
 		},
 		messages: {
-			Name: {
+            BrandName: {
 				required: 'Name is required',
-				minlength: 'Minimum Length is 5',
-				maxlength: 'Maximum Length is 50'
+				minlength: 'Minimum Length is 1',
+				maxlength: 'Maximum Length is 99'
 			},
 			Description: {
 				maxlength: 'Maximum Length is 500'
@@ -114,14 +124,14 @@
 			processData: false
 		})
         .done(function (response) {
-        	console.log(response);
+        	/*console.log(response);*/
         	if (response.Success) {
         		$("#ImageURL").val(response.ImageURL);
         		$("#productImage").attr("src", response.ImageURL);
         	}
         })
         .fail(function (XMLHttpRequest, textStatus, errorThrown) {
-        	alert("FAIL");
+            alert("Attempt failed.Contract with Tatene");
         });
 	});
 	$("#updateBtn").click(function () {
@@ -137,7 +147,7 @@
 				focusAction("tableContiner");
 			})
 			.fail(function (XMLHttpRequest, textStatus, errorThrown) {
-				alert("FAIL");
+                alert("Your attempt failed.Contract with Tatene");
 			});
 		}
 		else {

@@ -97,10 +97,12 @@ namespace MH.Web.Controllers
             model.PackSize = product.PackSize;
             model.CategoryID = product.Category != null ? product.Category.CID : 0;
             model.CompanyID = product.Company != null ? product.Company.CmpnyID : 0;
+            model.StateID = product.State != null ? product.State.SID : 0;
 
 
             model.AvailableCategories = CategoriesService.Instance.GetAllCategories();
             model.AvailableCompanies = CompaniesService.Instance.GetAllCompanies();
+            model.AvailableStates = StateService.Instance.GetAllStates();
             return PartialView(model);
         }
         // POST: Product/Edit/5
@@ -118,8 +120,10 @@ namespace MH.Web.Controllers
             existingProduct.CategoryID = model.CategoryID;
             existingProduct.Company = null; //mark it null. Because the referncy key is changed below
             existingProduct.CompanyID = model.CompanyID;
+            existingProduct.State = null;
+            existingProduct.StateId = model.StateID;
 
-            //dont update imageURL if its empty
+            //dont update imageURL if it's empty
             if (!string.IsNullOrEmpty(model.ImageURL))
             {
                 existingProduct.ImageURL = model.ImageURL;
